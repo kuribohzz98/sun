@@ -13,7 +13,21 @@
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
-    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203164546_added_entity_UserDeliveryInfo.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203165733_added_entity_Provider.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203172316_added_entity_ProductType.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203174948_added_entity_Product.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203175935_added_entity_Specifications.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203180338_added_entity_ProductHistory.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203181828_added_entity_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203182311_added_entity_ProductEvaluate.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="src/main/resources/config/liquibase/changelog/20200203164546_added_entity_constraints_UserDeliveryInfo.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203174948_added_entity_constraints_Product.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203175935_added_entity_constraints_Specifications.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203180338_added_entity_constraints_ProductHistory.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203181828_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
+    <include file="src/main/resources/config/liquibase/changelog/20200203182311_added_entity_constraints_ProductEvaluate.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

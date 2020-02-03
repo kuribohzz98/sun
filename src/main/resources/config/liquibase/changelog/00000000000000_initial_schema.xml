@@ -14,7 +14,7 @@
     -->
     <changeSet id="00000000000001" author="jhipster">
         <createTable tableName="user">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="int(11)" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="login" type="varchar(50)">
@@ -26,6 +26,8 @@
             <column name="email" type="varchar(191)">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
             </column>
+            <column name="phone" type="varchar(15)"/>
+            <column name="address" type="varchar(256)"/>
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
@@ -51,10 +53,7 @@
         </createTable>
 
         <createTable tableName="user_authority">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="user_id" type="bigint">
+            <column name="user_id" type="int(11)">
                 <constraints nullable="false"/>
             </column>
             <column name="authority_name" type="varchar(50)">
@@ -80,7 +79,7 @@
                                 columnDataType="varchar(60)"
                                 tableName="user"/>
         <loadData
-                  file="config/liquibase/data/user.csv"
+                  file="src/main/resources/config/liquibase/data/user.csv"
                   separator=";"
                   tableName="user">
             <column name="activated" type="boolean"/>
@@ -88,16 +87,16 @@
         </loadData>
         <dropDefaultValue tableName="user" columnName="created_date" columnDataType="datetime"/>
         <loadData
-                  file="config/liquibase/data/authority.csv"
+                  file="src/main/resources/config/liquibase/data/authority.csv"
                   separator=";"
                   tableName="authority"/>
 
         <loadData
-                  file="config/liquibase/data/user_authority.csv"
+                  file="src/main/resources/config/liquibase/data/user_authority.csv"
                   separator=";"
                   tableName="user_authority"/>
         <createTable tableName="jhi_persistent_audit_event">
-            <column name="event_id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="event_id" type="int(11)" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="principal" type="varchar(50)">
@@ -108,7 +107,7 @@
         </createTable>
 
         <createTable tableName="jhi_persistent_audit_evt_data">
-            <column name="event_id" type="bigint">
+            <column name="event_id" type="int(11)">
                 <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(150)">
@@ -128,7 +127,7 @@
         <createIndex indexName="idx_persistent_audit_evt_data"
                      tableName="jhi_persistent_audit_evt_data"
                      unique="false">
-            <column name="event_id" type="bigint"/>
+            <column name="event_id" type="int(11)"/>
         </createIndex>
 
         <addForeignKeyConstraint baseColumnNames="event_id"
@@ -140,7 +139,7 @@
 
     <changeSet author="jhipster" id="00000000000002" context="test">
         <createTable tableName="jhi_date_time_wrapper">
-            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
+            <column autoIncrement="${autoIncrement}" name="id" type="int(11)">
                 <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
             </column>
             <column name="instant" type="timestamp"/>

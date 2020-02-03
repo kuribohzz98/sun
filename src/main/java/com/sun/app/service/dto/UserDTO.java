@@ -33,6 +33,12 @@ public class UserDTO {
     private String email;
 
     @Size(max = 256)
+    private String phone;
+
+    @Size(max = 256)
+    private String address;
+
+    @Size(max = 256)
     private String imageUrl;
 
     private boolean activated = false;
@@ -60,6 +66,8 @@ public class UserDTO {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.address = user.getAddress();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
         this.langKey = user.getLangKey();
@@ -110,6 +118,22 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getImageUrl() {
@@ -179,18 +203,20 @@ public class UserDTO {
     @Override
     public String toString() {
         return "UserDTO{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated=" + activated +
-            ", langKey='" + langKey + '\'' +
-            ", createdBy=" + createdBy +
-            ", createdDate=" + createdDate +
-            ", lastModifiedBy='" + lastModifiedBy + '\'' +
-            ", lastModifiedDate=" + lastModifiedDate +
-            ", authorities=" + authorities +
+            "login='" + getLogin() + '\'' +
+            ", firstName='" + getFirstName() + '\'' +
+            ", lastName='" + getLastName() + '\'' +
+            ", email='" + getEmail() + '\'' +
+            ", phone='" + getPhone() + '\'' +
+            ", address='" + getAddress() + '\'' +
+            ", imageUrl='" + getImageUrl() + '\'' +
+            ", activated=" + isActivated() +
+            ", langKey='" + getLangKey() + '\'' +
+            ", createdBy=" + getCreatedBy() +
+            ", createdDate=" + getCreatedDate() +
+            ", lastModifiedBy='" + getLastModifiedBy() + '\'' +
+            ", lastModifiedDate=" + getLastModifiedDate() +
+            ", authorities=" + getAuthorities() +
             "}";
     }
 }

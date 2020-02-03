@@ -53,6 +53,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "last_name", length = 50)
     private String lastName;
 
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
     @Email
     @Size(min = 5, max = 254)
     @Column(length = 254, unique = true)
@@ -83,6 +89,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @OneToOne(mappedBy = "user")
+    private UserDeliveryInfo userDeliveryInfo;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -92,6 +101,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Payment> payments = new HashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<ProductEvaluate> productEvaluates = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -140,6 +155,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getImageUrl() {
@@ -198,6 +229,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.authorities = authorities;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -217,14 +249,16 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
+            "login='" + getLogin() + '\'' +
+            ", firstName='" + getFirstName() + '\'' +
+            ", lastName='" + getLastName() + '\'' +
+            ", email='" + getEmail() + '\'' +
+            ", phone='" + getPhone() + '\'' +
+            ", address='" + getAddress() + '\'' +
+            ", imageUrl='" + getImageUrl() + '\'' +
+            ", activated='" + getActivated() + '\'' +
+            ", langKey='" + getLangKey() + '\'' +
+            ", activationKey='" + getActivationKey() + '\'' +
             "}";
     }
 }
