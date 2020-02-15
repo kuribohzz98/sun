@@ -1,6 +1,6 @@
+import { AccountModule } from './account/account.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import './vendor';
 import { SunSharedModule } from 'app/shared/shared.module';
 import { SunCoreModule } from 'app/core/core.module';
@@ -13,6 +13,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { ModuleComponentModule } from './module/module-component.module';
+import { LoginRegisterComponent } from './core/login-register/login-register.component';
 
 @NgModule({
   imports: [
@@ -20,11 +22,13 @@ import { ErrorComponent } from './layouts/error/error.component';
     SunSharedModule,
     SunCoreModule,
     SunHomeModule,
+    ModuleComponentModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     SunEntityModule,
-    SunAppRoutingModule
+    SunAppRoutingModule,
+    AccountModule
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, LoginRegisterComponent],
   bootstrap: [MainComponent]
 })
 export class SunAppModule {}

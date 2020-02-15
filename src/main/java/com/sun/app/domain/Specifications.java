@@ -44,7 +44,7 @@ public class Specifications implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Product product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

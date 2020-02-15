@@ -69,18 +69,18 @@ public class Product implements Serializable {
     private Instant updatedAt;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_type_id", referencedColumnName = "id", insertable=false, updatable=false)
     private ProductType productType;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "provider_id", referencedColumnName = "id")
+    @JoinColumn(name = "provider_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Provider provider;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "payment_product",
-        joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false),
+        inverseJoinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id", insertable=false, updatable=false))
     private Set<Payment> payments = new HashSet<>();
 
     @OneToMany(mappedBy = "product")

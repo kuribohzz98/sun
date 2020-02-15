@@ -44,11 +44,11 @@ public class ProductEvaluate implements Serializable {
     private Instant createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Product product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

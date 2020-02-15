@@ -58,12 +58,12 @@ public class Payment implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "payment_product",
-               joinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
+               joinColumns = @JoinColumn(name = "payment_id", referencedColumnName = "id", insertable=false, updatable=false),
+               inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false))
     private Set<Product> products = new HashSet<>();
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

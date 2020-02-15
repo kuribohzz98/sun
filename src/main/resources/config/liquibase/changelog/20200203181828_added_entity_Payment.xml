@@ -22,7 +22,7 @@
             <column name="price" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="status" type="varchar(255)">
+            <column name="status" type="enum('PAID','DELIVERED')" defaultValue="PAID">
                 <constraints nullable="false" />
             </column>
             <column name="recipient_phone" type="varchar(255)">

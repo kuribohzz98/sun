@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
@@ -21,13 +20,7 @@ export class LoginModalComponent implements AfterViewInit {
     rememberMe: [false]
   });
 
-  constructor(
-    private loginService: LoginService,
-    private renderer: Renderer,
-    private router: Router,
-    public activeModal: NgbActiveModal,
-    private fb: FormBuilder
-  ) {}
+  constructor(private loginService: LoginService, private renderer: Renderer, private router: Router, private fb: FormBuilder) {}
 
   ngAfterViewInit(): void {
     if (this.username) {
@@ -41,7 +34,6 @@ export class LoginModalComponent implements AfterViewInit {
       username: '',
       password: ''
     });
-    this.activeModal.dismiss('cancel');
   }
 
   login(): void {
@@ -54,7 +46,6 @@ export class LoginModalComponent implements AfterViewInit {
       .subscribe(
         () => {
           this.authenticationError = false;
-          this.activeModal.close();
           if (
             this.router.url === '/account/register' ||
             this.router.url.startsWith('/account/activate') ||
@@ -67,13 +58,11 @@ export class LoginModalComponent implements AfterViewInit {
       );
   }
 
-  register(): void {
-    this.activeModal.dismiss('to state register');
-    this.router.navigate(['/account/register']);
-  }
+  // register(): void {
+  //   this.router.navigate(['/account/register']);
+  // }
 
   requestResetPassword(): void {
-    this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
   }
 }

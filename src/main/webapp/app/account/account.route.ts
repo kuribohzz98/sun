@@ -11,7 +11,7 @@ const ACCOUNT_ROUTES = [activateRoute, passwordRoute, passwordResetFinishRoute, 
 
 export const accountState: Routes = [
   {
-    path: '',
+    path: 'account',
     children: ACCOUNT_ROUTES
   }
 ];

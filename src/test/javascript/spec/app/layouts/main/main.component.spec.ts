@@ -35,7 +35,7 @@ describe('Component Tests', () => {
 
     describe('page title', () => {
       let routerState: any;
-      const defaultPageTitle = 'Sun';
+      const defaultPageTitle = 'Đức Thọ';
       const parentRoutePageTitle = 'parentTitle';
       const childRoutePageTitle = 'childTitle';
       const navigationEnd = new NavigationEnd(1, '', '');

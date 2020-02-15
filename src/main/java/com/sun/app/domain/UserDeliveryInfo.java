@@ -46,7 +46,7 @@ public class UserDeliveryInfo implements Serializable {
 
     @OneToOne(optional = false)
     @NotNull
-    @JoinColumn(unique = true, name = "user_id", referencedColumnName = "id")
+    @JoinColumn(unique = true, name = "user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
