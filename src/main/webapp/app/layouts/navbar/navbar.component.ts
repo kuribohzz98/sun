@@ -1,3 +1,5 @@
+import { NotifierService } from 'angular-notifier';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IProductType } from 'app/shared/model/product-type.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,7 +27,9 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private router: Router,
-    private productTypeService: ProductTypeService
+    private productTypeService: ProductTypeService,
+    private modalService: NgbModal,
+    private notifiService: NotifierService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
@@ -41,12 +45,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  isAdmin(): boolean {
+    return this.accountService.isAdmin();
+  }
+
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;
   }
 
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
+  }
+
+  openLogin(content: any) {
+    this.modalService.open(content, { size: 'lg' }).result.then(result => {});
   }
 
   login(): void {
@@ -56,7 +68,12 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.collapseNavbar();
     this.loginService.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
+    this.notifiService.show({
+      id: 'logout',
+      type: 'success',
+      message: 'Đăng xuất thành công'
+    });
   }
 
   toggleNavbar(): void {

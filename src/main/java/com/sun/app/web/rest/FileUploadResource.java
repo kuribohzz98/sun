@@ -34,10 +34,9 @@ public class FileUploadResource {
     }
 
     private String doUpload(List<MultipartFile> files) {
-
         // Thư mục gốc upload file.
 
-        File uploadRootDir = new File("assest/upload");
+        File uploadRootDir = new File("src/main/resources/assest/upload");
         // Tạo thư mục gốc upload nếu nó không tồn tại.
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();

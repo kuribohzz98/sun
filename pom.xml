@@ -10,6 +10,10 @@
     <name>Sun</name>
 
     <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
         <!-- jhipster-needle-maven-repository -->
     </repositories>
 
@@ -329,6 +333,11 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.momo-wallet</groupId>
+            <artifactId>momopayment</artifactId>
+            <version>1.0</version>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>

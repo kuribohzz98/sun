@@ -10,36 +10,6 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_productTypeId">Product Type Id</label>
-                    <input type="number" class="form-control" name="productTypeId" id="field_productTypeId"
-                           formControlName="productTypeId"/>
-                    <div *ngIf="editForm.get('productTypeId')!.invalid && (editForm.get('productTypeId')!.dirty || editForm.get('productTypeId')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('productTypeId')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('productTypeId')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_providerId">Provider Id</label>
-                    <input type="number" class="form-control" name="providerId" id="field_providerId"
-                           formControlName="providerId"/>
-                    <div *ngIf="editForm.get('providerId')!.invalid && (editForm.get('providerId')!.dirty || editForm.get('providerId')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('providerId')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('providerId')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>

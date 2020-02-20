@@ -38,6 +38,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  isAdmin(): boolean {
+    return this.accountService.isAdmin();
+  }
+
   isAuthenticated(): boolean {
     return this.accountService.isAuthenticated();
   }

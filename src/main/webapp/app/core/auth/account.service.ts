@@ -55,7 +55,11 @@ export class AccountService {
   }
 
   isAuthenticated(): boolean {
-    return this.userIdentity !== null;
+    return this.userIdentity !== null && !!this.userIdentity.authorities.length;
+  }
+
+  isAdmin(): boolean {
+    return this.userIdentity !== null && !!this.userIdentity.authorities.length && this.userIdentity.authorities.includes('ADMIN');
   }
 
   getAuthenticationState(): Observable<Account | null> {

@@ -15,6 +15,7 @@ import { IProductType } from 'app/shared/model/product-type.model';
 import { ProductTypeService } from 'app/entities/product-type/product-type.service';
 import { IProvider } from 'app/shared/model/provider.model';
 import { ProviderService } from 'app/entities/provider/provider.service';
+import * as uuid from 'uuid/v4';
 
 type SelectableEntity = IProductType | IProvider;
 
@@ -134,14 +135,17 @@ export class ProductUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const product = this.createFromForm();
-    console.log(product);
-    this.fileUploadService.uploadOneFile(this.fileToUpload).subscribe(console.log);
-    // if (product.id !== undefined) {
-    //   this.subscribeToSaveResponse(this.productService.update(product));
-    // } else {
-    //   this.subscribeToSaveResponse(this.productService.create(product));
-    // }
+    const typeFile = this.fileToUpload ? this.fileToUpload.name.split('.') : null;
+    const nameFile = typeFile ? uuid() + '.' + typeFile[typeFile.length - 1] : '';
+    const product = this.createFromForm(nameFile);
+    if (this.fileToUpload) {
+      this.fileUploadService.uploadOneFile(this.fileToUpload, nameFile).subscribe(console.log);
+    }
+    if (product.id !== undefined) {
+      this.subscribeToSaveResponse(this.productService.update(product));
+    } else {
+      this.subscribeToSaveResponse(this.productService.create(product));
+    }
   }
 
   handleFileInput(files: FileList): void {
@@ -149,7 +153,7 @@ export class ProductUpdateComponent implements OnInit {
     console.log(files.item(0));
   }
 
-  private createFromForm(): IProduct {
+  private createFromForm(nameFile: string): IProduct {
     return {
       ...new Product(),
       id: this.editForm.get(['id'])!.value,
@@ -161,7 +165,7 @@ export class ProductUpdateComponent implements OnInit {
       importPrice: this.editForm.get(['importPrice'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
       productLine: this.editForm.get(['productLine'])!.value,
-      image: this.editForm.get(['image'])!.value,
+      image: nameFile,
       point: this.editForm.get(['point'])!.value,
       createdAt:
         this.editForm.get(['createdAt'])!.value != null ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,

@@ -1,498 +1,442 @@
-<div class="site-block-wrap">
-    <div class="owl-carousel with-dots">
-        <div class="site-blocks-cover overlay overlay-2"
-            style="background-image: url(content/images/silver-and-black-laptop.jpg);" data-aos="fade"
-            id="home-section">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-6 mt-lg-5 text-center">
-                        <h1 class="text-shadow">Đức Thọ Electronic</h1>
-                        <p class="mb-5 text-shadow">Đại lý bán lẻ đồ điện tử lớn nhất cả nước</p>
+<div *ngIf="!isAdmin()">
+    <div class="site-block-wrap">
+        <div class="owl-carousel with-dots">
+            <div class="site-blocks-cover overlay overlay-2"
+                style="background-image: url(content/images/silver-and-black-laptop.jpg);" data-aos="fade"
+                id="home-section">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-6 mt-lg-5 text-center">
+                            <h1 class="text-shadow">Đức Thọ Electronic</h1>
+                            <p class="mb-5 text-shadow">Đại lý bán lẻ đồ điện tử lớn nhất cả nước</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="site-blocks-cover overlay overlay-2" style="background-image: url(content/images/hero_2.jpg);"
-            data-aos="fade" id="home-section">
-
-
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-md-6 mt-lg-5 text-center">
-                        <h1 class="text-shadow">Find Your Perfect Property For Your Home</h1>
-                        <p class="mb-5 text-shadow">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque quam
-                            doloribus reprehenderit dolore adipisci rerum?</p>
-                        <p><a href="#" target="_blank" class="btn btn-primary px-5 py-3">Get Started</a></p>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
-</div>
-
-
-<div class="site-section" id="properties-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-7 text-left">
-                <h2 class="section-title mb-3">Sản Phẩm Đang khuyến mại</h2>
+    
+    
+    <div class="site-section" id="properties-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-7 text-left">
+                    <h2 class="section-title mb-3">Sản Phẩm Đang khuyến mại</h2>
+                </div>
             </div>
-        </div>
-        <div class="row large-gutters">
-            <ng-container *ngFor="let product of products; let i=index">
-                <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
-                    <div class="ftco-media-1">
-                        <div class="ftco-media-1-inner">
-                            <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
-                                    src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
-                                    class="img-fluid"></a>
-                            <div class="ftco-media-details">
-                                <h3>{{product.name}}</h3>
-                                <p>{{product.code}}</p>
-                                <div style="margin-top: 10px;">
-                                    <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
-                                        <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                        <p class="text-danger d-inline">
-                                            -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
-                                        </p>
-                                        <p><del>{{product.sellPrice | number}}đ</del></p>
-                                    </ng-container>
-                                    <ng-template #productSale>
-                                        <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
-                                    </ng-template>
+            <div class="row large-gutters">
+                <ng-container *ngFor="let product of products; let i=index">
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
+                        <div class="ftco-media-1">
+                            <div class="ftco-media-1-inner">
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                        class="img-fluid"></a>
+                                <div class="ftco-media-details">
+                                    <h3>{{product.name}}</h3>
+                                    <p>{{product.code}}</p>
+                                    <div style="margin-top: 10px;">
+                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            <p class="text-danger d-inline">
+                                                -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                                            </p>
+                                            <p><del>{{product.sellPrice | number}}đ</del></p>
+                                        </ng-container>
+                                        <ng-template #productSale>
+                                            <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                                        </ng-template>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </ng-container>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <p><a [routerLink]="['/san-pham']" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
                 </div>
-            </ng-container>
-        </div>
-        <div class="row">
-            <div class="col text-center">
-                <p><a [routerLink]="['/san-pham']" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
             </div>
         </div>
     </div>
+    
+    <section class="py-5 color-primary site-section how-it-works" id="san-pham">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-3" style="color: #fff;">Danh mục sản phẩm</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="pr-5 first-step">
+                        <span>01.</span>
+                        <span class="custom-icon flaticon-house text-black"></span>
+                        <h3>Find Property.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+    
+                <div class="col-md-4 text-center">
+                    <div class="pr-5 second-step">
+                        <span>02.</span>
+                        <span class="custom-icon flaticon-coin text-black"></span>
+                        <h3>Buy Property.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+    
+                <div class="col-md-4 text-center">
+                    <div class="pr-5">
+                        <span>03.</span>
+                        <span class="custom-icon flaticon-home text-black"></span>
+                        <h3>Outstanding Houses.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    <section class="site-section" id="about-section">
+        <div class="container">
+    
+            <div class="row large-gutters">
+                <div class="col-lg-6 mb-5">
+    
+                    <div class="owl-carousel slide-one-item with-dots">
+                        <div><img src="../../content/images/img_1.jpg" alt="Image" class="img-fluid"></div>
+                        <div><img src="../../content/images/img_2.jpg" alt="Image" class="img-fluid"></div>
+                        <div><img src="../../content/images/img_3.jpg" alt="Image" class="img-fluid"></div>
+                    </div>
+    
+                </div>
+                <div class="col-lg-6 ml-auto">
+    
+                    <h2 class="section-title mb-3">Warehouse Real Estate Template</h2>
+                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi
+                        voluptas
+                        impedit Quo suscipit omnis iste velit maxime.</p>
+    
+                    <ul class="list-unstyled ul-check success">
+                        <li>Placeat maxime animi minus</li>
+                        <li>Dolore qui placeat maxime</li>
+                        <li>Consectetur adipisicing</li>
+                        <li>Lorem ipsum dolor</li>
+                        <li>Placeat molestias animi</li>
+                    </ul>
+    
+                    <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    <section class="site-section bg-light" id="services-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Services</h2>
+                </div>
+            </div>
+            <div class="row align-items-stretch">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-house"></span></div>
+                        <div>
+                            <h3>Find Property</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-coin"></span></div>
+                        <div>
+                            <h3>Buy Property</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-home"></span></div>
+                        <div>
+                            <h3>Beautiful Home</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+    
+    
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-flat"></span></div>
+                        <div>
+                            <h3>Buildings &amp; Lands</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-location"></span></div>
+                        <div>
+                            <h3>Property Locator</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-mobile-phone"></span></div>
+                        <div>
+                            <h3>Mobile Apps</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    <section class="site-section testimonial-wrap" id="testimonials-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Testimonials<h2>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="ftco-testimonial-1">
+                        <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                            <img src="../../content/images/person_1.jpg" alt="Image" class="img-fluid mr-3">
+                            <div>
+                                <h3>Allison Holmes</h3>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
+                                nobis
+                                libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
+                                amet
+                                necessitatibus. A, provident aperiam!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="ftco-testimonial-1">
+                        <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                            <img src="../../content/images/person_2.jpg" alt="Image" class="img-fluid mr-3">
+                            <div>
+                                <h3>James Phelps</h3>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
+                                nobis
+                                libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
+                                amet
+                                necessitatibus. A, provident aperiam!</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 mb-4">
+                    <div class="ftco-testimonial-1">
+                        <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                            <img src="../../content/images/person_3.jpg" alt="Image" class="img-fluid mr-3">
+                            <div>
+                                <h3>Nestor Helsin</h3>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
+                                nobis
+                                libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
+                                amet
+                                necessitatibus. A, provident aperiam!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="ftco-testimonial-1">
+                        <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
+                            <img src="../../content/images/person_1.jpg" alt="Image" class="img-fluid mr-3">
+                            <div>
+                                <h3>Allison Holmes</h3>
+                                <span>Customer</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
+                                nobis
+                                libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
+                                amet
+                                necessitatibus. A, provident aperiam!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section class="site-section" id="news-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">News &amp; Events</h2>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                    <div class="h-entry">
+                        <a href="single.html"><img src="../../content/images/img_1.jpg" alt="Image" class="img-fluid"></a>
+                        <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
+                                for
+                                2019</a></h2>
+                        <div class="meta mb-4">Allison Holmes <span class="mx-2"></span> Jan 18, 2019<span
+                                class="mx-2"></span> <a href="single.html">News</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                    <div class="h-entry">
+                        <a href="single.html"><img src="../../content/images/img_2.jpg" alt="Image" class="img-fluid"></a>
+                        <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
+                                for
+                                2019</a></h2>
+                        <div class="meta mb-4">James Phelps <span class="mx-2"></span> Jan 18, 2019<span
+                                class="mx-2"></span> <a href="single.html">News</a></div>
+    
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+                    <div class="h-entry">
+                        <a href="single.html"><img src="../../content/images/img_3.jpg" alt="Image" class="img-fluid"></a>
+                        <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
+                                for
+                                2019</a></h2>
+                        <div class="meta mb-4">Allison Holmes <span class="mx-2"></span> Jan 18, 2019<span
+                                class="mx-2"></span> <a href="single.html">News</a></div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    
+    <section class="site-section bg-light bg-image" id="contact-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Contct Us</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 mb-5">
+    
+    
+    
+                    <form action="#" class="p-5 bg-white">
+    
+                        <h2 class="h4 text-black mb-5">Get In Touch</h2>
+    
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">First Name</label>
+                                <input type="text" id="fname" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Last Name</label>
+                                <input type="text" id="lname" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group">
+    
+                            <div class="col-md-12">
+                                <label class="text-black" for="email">Email</label>
+                                <input type="email" id="email" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group">
+    
+                            <div class="col-md-12">
+                                <label class="text-black" for="subject">Subject</label>
+                                <input type="subject" id="subject" class="form-control">
+                            </div>
+                        </div>
+    
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="text-black" for="message">Message</label>
+                                <textarea name="message" id="message" cols="30" rows="7" class="form-control"
+                                    placeholder="Write your notes or questions here..."></textarea>
+                            </div>
+                        </div>
+    
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                            </div>
+                        </div>
+    
+    
+                    </form>
+                </div>
+                <div class="col-md-5">
+    
+                    <div class="p-4 mb-3 bg-white">
+                        <p class="mb-0 font-weight-bold">Address</p>
+                        <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+    
+                        <p class="mb-0 font-weight-bold">Phone</p>
+                        <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+    
+                        <p class="mb-0 font-weight-bold">Email Address</p>
+                        <p class="mb-0"><a href="#">youremail@domain.com</a></p>
+    
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-
-<section class="py-5 color-primary site-section how-it-works" id="san-pham">
-    <div class="container">
-        <div class="row mb-5 justify-content-center">
-            <div class="col-md-7 text-center">
-                <h2 class="section-title mb-3" style="color: #fff;">Danh mục sản phẩm</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <div class="pr-5 first-step">
-                    <span>01.</span>
-                    <span class="custom-icon flaticon-house text-black"></span>
-                    <h3>Find Property.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 text-center">
-                <div class="pr-5 second-step">
-                    <span>02.</span>
-                    <span class="custom-icon flaticon-coin text-black"></span>
-                    <h3>Buy Property.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                </div>
-            </div>
-
-            <div class="col-md-4 text-center">
-                <div class="pr-5">
-                    <span>03.</span>
-                    <span class="custom-icon flaticon-home text-black"></span>
-                    <h3>Outstanding Houses.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<section class="site-section" id="about-section">
-    <div class="container">
-
-        <div class="row large-gutters">
-            <div class="col-lg-6 mb-5">
-
-                <div class="owl-carousel slide-one-item with-dots">
-                    <div><img src="../../content/images/img_1.jpg" alt="Image" class="img-fluid"></div>
-                    <div><img src="../../content/images/img_2.jpg" alt="Image" class="img-fluid"></div>
-                    <div><img src="../../content/images/img_3.jpg" alt="Image" class="img-fluid"></div>
-                </div>
-
-            </div>
-            <div class="col-lg-6 ml-auto">
-
-                <h2 class="section-title mb-3">Warehouse Real Estate Template</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi
-                    voluptas
-                    impedit Quo suscipit omnis iste velit maxime.</p>
-
-                <ul class="list-unstyled ul-check success">
-                    <li>Placeat maxime animi minus</li>
-                    <li>Dolore qui placeat maxime</li>
-                    <li>Consectetur adipisicing</li>
-                    <li>Lorem ipsum dolor</li>
-                    <li>Placeat molestias animi</li>
-                </ul>
-
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<section class="site-section bg-light" id="services-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="section-title mb-3">Services</h2>
-            </div>
-        </div>
-        <div class="row align-items-stretch">
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-house"></span></div>
-                    <div>
-                        <h3>Find Property</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-coin"></span></div>
-                    <div>
-                        <h3>Buy Property</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-home"></span></div>
-                    <div>
-                        <h3>Beautiful Home</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-flat"></span></div>
-                    <div>
-                        <h3>Buildings &amp; Lands</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-location"></span></div>
-                    <div>
-                        <h3>Property Locator</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="500">
-                <div class="unit-4 d-flex">
-                    <div class="unit-4-icon mr-4"><span class="text-primary flaticon-mobile-phone"></span></div>
-                    <div>
-                        <h3>Mobile Apps</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
-                            eligendi
-                            at.</p>
-                        <p><a href="#">Learn More</a></p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="site-section testimonial-wrap" id="testimonials-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="section-title mb-3">Testimonials<h2>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="ftco-testimonial-1">
-                    <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-                        <img src="../../content/images/person_1.jpg" alt="Image" class="img-fluid mr-3">
-                        <div>
-                            <h3>Allison Holmes</h3>
-                            <span>Customer</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
-                            nobis
-                            libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
-                            amet
-                            necessitatibus. A, provident aperiam!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="ftco-testimonial-1">
-                    <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-                        <img src="../../content/images/person_2.jpg" alt="Image" class="img-fluid mr-3">
-                        <div>
-                            <h3>James Phelps</h3>
-                            <span>Customer</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
-                            nobis
-                            libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
-                            amet
-                            necessitatibus. A, provident aperiam!</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="ftco-testimonial-1">
-                    <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-                        <img src="../../content/images/person_3.jpg" alt="Image" class="img-fluid mr-3">
-                        <div>
-                            <h3>Nestor Helsin</h3>
-                            <span>Customer</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
-                            nobis
-                            libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
-                            amet
-                            necessitatibus. A, provident aperiam!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="ftco-testimonial-1">
-                    <div class="ftco-testimonial-vcard d-flex align-items-center mb-4">
-                        <img src="../../content/images/person_1.jpg" alt="Image" class="img-fluid mr-3">
-                        <div>
-                            <h3>Allison Holmes</h3>
-                            <span>Customer</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, mollitia. Possimus mollitia
-                            nobis
-                            libero quidem aut tempore dolore iure maiores, perferendis, provident numquam illum nisi
-                            amet
-                            necessitatibus. A, provident aperiam!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="site-section" id="news-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="section-title mb-3">News &amp; Events</h2>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="h-entry">
-                    <a href="single.html"><img src="../../content/images/img_1.jpg" alt="Image" class="img-fluid"></a>
-                    <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
-                            for
-                            2019</a></h2>
-                    <div class="meta mb-4">Allison Holmes <span class="mx-2"></span> Jan 18, 2019<span
-                            class="mx-2"></span> <a href="single.html">News</a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="h-entry">
-                    <a href="single.html"><img src="../../content/images/img_2.jpg" alt="Image" class="img-fluid"></a>
-                    <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
-                            for
-                            2019</a></h2>
-                    <div class="meta mb-4">James Phelps <span class="mx-2"></span> Jan 18, 2019<span
-                            class="mx-2"></span> <a href="single.html">News</a></div>
-
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-                <div class="h-entry">
-                    <a href="single.html"><img src="../../content/images/img_3.jpg" alt="Image" class="img-fluid"></a>
-                    <h2 class="font-size-regular"><a href="single.html" class="text-dark">Popular Real Estate Properties
-                            for
-                            2019</a></h2>
-                    <div class="meta mb-4">Allison Holmes <span class="mx-2"></span> Jan 18, 2019<span
-                            class="mx-2"></span> <a href="single.html">News</a></div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="site-section bg-light bg-image" id="contact-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="section-title mb-3">Contct Us</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-7 mb-5">
-
-
-
-                <form action="#" class="p-5 bg-white">
-
-                    <h2 class="h4 text-black mb-5">Get In Touch</h2>
-
-                    <div class="row form-group">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <label class="text-black" for="fname">First Name</label>
-                            <input type="text" id="fname" class="form-control">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="text-black" for="lname">Last Name</label>
-                            <input type="text" id="lname" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-
-                        <div class="col-md-12">
-                            <label class="text-black" for="email">Email</label>
-                            <input type="email" id="email" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-
-                        <div class="col-md-12">
-                            <label class="text-black" for="subject">Subject</label>
-                            <input type="subject" id="subject" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <label class="text-black" for="message">Message</label>
-                            <textarea name="message" id="message" cols="30" rows="7" class="form-control"
-                                placeholder="Write your notes or questions here..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
-                        </div>
-                    </div>
-
-
-                </form>
-            </div>
-            <div class="col-md-5">
-
-                <div class="p-4 mb-3 bg-white">
-                    <p class="mb-0 font-weight-bold">Address</p>
-                    <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
-
-                    <p class="mb-0 font-weight-bold">Phone</p>
-                    <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
-
-                    <p class="mb-0 font-weight-bold">Email Address</p>
-                    <p class="mb-0"><a href="#">youremail@domain.com</a></p>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
-
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account"
-                   > You are logged in as user "{{account.login}}". </span>
-            </div>
-
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register">Register a new account</a>
-            </div>
-        </div>
-
-        <p>
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-        </p>
-    </div>
-</div> -->

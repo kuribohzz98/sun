@@ -117,6 +117,11 @@ public class ProductService {
                     e.printStackTrace();
                 }
                 productDTO.setImage(Base64.encode(media));
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 return productDTO;
             });
     }

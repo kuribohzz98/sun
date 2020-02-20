@@ -47,7 +47,7 @@
                 <td>{{product.importPrice}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.productLine}}</td>
-                <td>{{product.image}}</td>
+                <td><img style="width: 130px; height: 100px;" src="{{'data:image/png;base64,' + product.image}}"></td>
                 <td>{{product.point}}</td>
                 <td>{{product.createdAt | date:'medium'}}</td>
                 <td>{{product.updatedAt | date:'medium'}}</td>

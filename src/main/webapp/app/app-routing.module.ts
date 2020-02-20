@@ -22,7 +22,7 @@ const routes: Route[] = [
     data: {
       authorities: ['ROLE_ADMIN']
     },
-    canActivate: [UserRouteAccessService],
+    // canActivate: [UserRouteAccessService],
     loadChildren: () => import('./admin/admin-routing.module').then(m => m.AdminRoutingModule)
   },
   {
