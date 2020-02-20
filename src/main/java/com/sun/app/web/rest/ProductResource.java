@@ -1,5 +1,6 @@
 package com.sun.app.web.rest;
 
+import com.sun.app.domain.Product;
 import com.sun.app.service.ProductService;
 import com.sun.app.web.rest.errors.BadRequestAlertException;
 import com.sun.app.service.dto.ProductDTO;
@@ -94,9 +95,23 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of products in body.
      */
     @GetMapping("/products")
-    public ResponseEntity<List<ProductDTO>> getAllProducts(Pageable pageable) {
+    public ResponseEntity<List<ProductDTO>> getAllProducts(
+        @RequestParam(required = false) Integer salePrice,
+        @RequestParam(required = false) Integer productTypeId,
+        @RequestParam(required = false) Integer providerId,
+        @RequestParam(required = false) Integer maxSellPrice,
+        @RequestParam(required = false) Integer minSellPrice,
+        Pageable pageable
+    ) {
         log.debug("REST request to get a page of Products");
-        Page<ProductDTO> page = productService.findAll(pageable);
+        Page<ProductDTO> page = productService.findAll(
+            pageable,
+            salePrice,
+            productTypeId,
+            providerId,
+            maxSellPrice,
+            minSellPrice
+        );
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -110,8 +125,8 @@ public class ProductResource {
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
         log.debug("REST request to get Product : {}", id);
-        Optional<ProductDTO> productDTO = productService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(productDTO);
+        Optional<ProductDTO> product = productService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(product);
     }
 
     /**
@@ -125,5 +140,18 @@ public class ProductResource {
         log.debug("REST request to delete Product : {}", id);
         productService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code GET  /products/:code} : get the "code" product.
+     *
+     * @param code the code of the productDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/products/getOne")
+    public ResponseEntity<ProductDTO> getProduct(@RequestParam String code) {
+        log.debug("REST request to get Product ________________: {}", code);
+        Optional<ProductDTO> productDTO = productService.findOneByCode(code);
+        return ResponseUtil.wrapOrNotFound(productDTO);
     }
 }

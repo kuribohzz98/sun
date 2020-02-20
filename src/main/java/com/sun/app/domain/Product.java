@@ -24,9 +24,9 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "product_type_id", nullable = false)
-    private Integer productTypeId;
+   @NotNull
+   @Column(name = "product_type_id", nullable = false)
+   private Integer productTypeId;
 
     @NotNull
     @Column(name = "provider_id", nullable = false)
@@ -57,8 +57,8 @@ public class Product implements Serializable {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "point")
-    private Integer point;
+    @Column(name = "sale_price")
+    private Integer salePrice;
 
     @NotNull
     @Column(name = "created_at", nullable = false)
@@ -68,12 +68,12 @@ public class Product implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_type_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @ManyToOne
+    @JoinColumn(name = "product_type_id", insertable = false, updatable = false)
     private ProductType productType;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "provider_id", referencedColumnName = "id", insertable=false, updatable=false)
+    @ManyToOne
+    @JoinColumn(name = "provider_id", insertable = false, updatable = false)
     private Provider provider;
 
     @ManyToMany
@@ -101,18 +101,18 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Integer getProductTypeId() {
-        return productTypeId;
-    }
+   public Integer getProductTypeId() {
+       return productTypeId;
+   }
 
-    public Product productTypeId(Integer productTypeId) {
-        this.productTypeId = productTypeId;
-        return this;
-    }
+   public Product productTypeId(Integer productTypeId) {
+       this.productTypeId = productTypeId;
+       return this;
+   }
 
-    public void setProductTypeId(Integer productTypeId) {
-        this.productTypeId = productTypeId;
-    }
+   public void setProductTypeId(Integer productTypeId) {
+       this.productTypeId = productTypeId;
+   }
 
     public Integer getProviderId() {
         return providerId;
@@ -218,17 +218,17 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public Integer getPoint() {
-        return point;
+    public Integer getSalePrice() {
+        return salePrice;
     }
 
-    public Product point(Integer point) {
-        this.point = point;
+    public Product salePrice(Integer salePrice) {
+        this.salePrice = salePrice;
         return this;
     }
 
-    public void setPoint(Integer point) {
-        this.point = point;
+    public void setSalePrice(Integer salePrice) {
+        this.salePrice = salePrice;
     }
 
     public Instant getCreatedAt() {
@@ -358,9 +358,14 @@ public class Product implements Serializable {
             ", quantity=" + getQuantity() +
             ", productLine='" + getProductLine() + "'" +
             ", image='" + getImage() + "'" +
-            ", point=" + getPoint() +
+            ", salePrice=" + getSalePrice() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
+            ", productType='" + getProductType() + "'" +
+            ", provider='" + getProvider() + "'" +
+//            ", specifications='" + getSpecifications() + "'" +
+//            ", productEvaluates='" + getProductEvaluates() + "'" +
+//            ", productHistories='" + getProductHistories() + "'" +
             "}";
     }
 }

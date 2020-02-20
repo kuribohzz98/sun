@@ -1,7 +1,8 @@
 <div class="site-block-wrap">
     <div class="owl-carousel with-dots">
-        <div class="site-blocks-cover overlay overlay-2" style="background-image: url(content/images/hero_1.jpg);"
-            data-aos="fade" id="home-section">
+        <div class="site-blocks-cover overlay overlay-2"
+            style="background-image: url(content/images/silver-and-black-laptop.jpg);" data-aos="fade"
+            id="home-section">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-6 mt-lg-5 text-center">
@@ -11,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="site-blocks-cover overlay overlay-2" style="background-image: url(content/images/hero_2.jpg);"
+        <!-- <div class="site-blocks-cover overlay overlay-2" style="background-image: url(content/images/hero_2.jpg);"
             data-aos="fade" id="home-section">
 
 
@@ -26,7 +27,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -35,216 +36,78 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-7 text-left">
-                <h2 class="section-title mb-3">Sản Phẩm Mới</h2>
+                <h2 class="section-title mb-3">Sản Phẩm Đang khuyến mại</h2>
             </div>
         </div>
         <div class="row large-gutters">
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="property-single.html" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/1942/201361/tivi-sony-kd-43x8000g-2-1-org.jpg"
-                                alt="FImageo" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Android Tivi Sony 4K 43 inch</h3>
-                            <p>KD-43X8000G</p>
-                            <strong>11.900.000đ</strong>
+            <ng-container *ngFor="let product of products; let i=index">
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
+                    <div class="ftco-media-1">
+                        <div class="ftco-media-1-inner">
+                            <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                                    src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                    class="img-fluid"></a>
+                            <div class="ftco-media-details">
+                                <h3>{{product.name}}</h3>
+                                <p>{{product.code}}</p>
+                                <div style="margin-top: 10px;">
+                                    <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                                        <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        <p class="text-danger d-inline">
+                                            -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                                        </p>
+                                        <p><del>{{product.sellPrice | number}}đ</del></p>
+                                    </ng-container>
+                                    <ng-template #productSale>
+                                        <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                                    </ng-template>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="sanpham/tivi/LG_SHR76210CK" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/1942/204233/tivi-led-lg-55um7290pta-2-2-org.jpg"
-                                alt="Image" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Smart Tivi LG 4K 55 inch</h3>
-                            <p>55UM7290PTD</p>
-                            <strong>14.300.000đ</strong>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="property-single.html" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/44/210511/lenovo-ideapad-l340-15irh-i7-9750h-8gb-1tb-3gb-gtx-2-org.jpg"
-                                alt="Image" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Lenovo IdeaPad L340 15IRH i7 9750H</h3>
-                            <p>81LK00FBVN</p>
-                            <p>Ram 8Gb | Ổ cứng 1TB HDD</p>
-                            <strong>21.990.000đ</strong>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="property-single.html" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/1943/97813/panasonic-nr-ba228pkv1-1-2-org.jpg"
-                                alt="Image" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Tủ lạnh Panasonic Inverter 188 lít</h3>
-                            <p>NR-BA228PKV1</p>
-                            <strong>10.190.000đ</strong>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="property-single.html" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/2002/198091/aqua-aqa-kcrv9wnz-1-org.jpg"
-                                alt="Image" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Điều hòa Aqua Inverter 8500BTU</h3>
-                            <p>AQA-KCRV9WNZ</p>
-                            <strong>8.490.000đ</strong>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
-                <div class="ftco-media-1">
-                    <div class="ftco-media-1-inner">
-                        <a href="#" class="d-inline-block mb-4"><img
-                                src="https://cdn.tgdd.vn/Products/Images/3385/110633/sunhouse-shr76210ck-10-loi-1-4-org.jpg"
-                                alt="Image" class="img-fluid"></a>
-                        <div class="ftco-media-details">
-                            <h3>Máy lọc nước RO nóng lạnh Sunhouse 10 lõi</h3>
-                            <p>SHR76210CK</p>
-                            <strong>8.290.000đ</strong>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            </ng-container>
         </div>
         <div class="row">
             <div class="col text-center">
-                <p><a href="#" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
+                <p><a [routerLink]="['/san-pham']" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
             </div>
         </div>
     </div>
 </div>
 
-
-
-<section class="site-section" id="agents-section">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-md-7 text-left">
-                <h2 class="section-title mb-3">Real Estate Agents</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus minima neque tempora
-                    reiciendis.</p>
-            </div>
-        </div>
-        <div class="row">
-
-
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="team-member">
-                    <figure>
-                        <ul class="social">
-                            <li><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                            <li><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                        <img src="../../content/images/person_1.jpg" alt="Image" class="img-fluid">
-                    </figure>
-                    <div class="p-3 bg-primary">
-                        <h3 class="mb-2">Allison Holmes</h3>
-                        <span class="position">Real Estate Agent</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="team-member">
-                    <figure>
-                        <ul class="social">
-                            <li><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                            <li><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                        <img src="../../content/images/person_2.jpg" alt="Image" class="img-fluid">
-                    </figure>
-                    <div class="p-3 bg-primary">
-                        <h3 class="mb-2">Dave Simpson</h3>
-                        <span class="position">Real Estate Agent</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="team-member">
-                    <figure>
-                        <ul class="social">
-                            <li><a href="#"><span class="icon-facebook"></span></a></li>
-                            <li><a href="#"><span class="icon-twitter"></span></a></li>
-                            <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                            <li><a href="#"><span class="icon-instagram"></span></a></li>
-                        </ul>
-                        <img src="../../content/images/person_3.jpg" alt="Image" class="img-fluid">
-                    </figure>
-                    <div class="p-3 bg-primary">
-                        <h3 class="mb-2">Ben Thompson</h3>
-                        <span class="position">Real Estate Agent</span>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</section>
-
-<section class="py-5 bg-primary site-section how-it-works" id="howitworks-section">
+<section class="py-5 color-primary site-section how-it-works" id="san-pham">
     <div class="container">
         <div class="row mb-5 justify-content-center">
             <div class="col-md-7 text-center">
-                <h2 class="section-title mb-3 text-black">How It Works</h2>
+                <h2 class="section-title mb-3" style="color: #fff;">Danh mục sản phẩm</h2>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4 text-center">
                 <div class="pr-5 first-step">
-                    <span class="text-black">01.</span>
+                    <span>01.</span>
                     <span class="custom-icon flaticon-house text-black"></span>
-                    <h3 class="text-black">Find Property.</h3>
-                    <p class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>Find Property.</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
             </div>
 
             <div class="col-md-4 text-center">
                 <div class="pr-5 second-step">
-                    <span class="text-black">02.</span>
+                    <span>02.</span>
                     <span class="custom-icon flaticon-coin text-black"></span>
-                    <h3 class="text-dark">Buy Property.</h3>
-                    <p class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>Buy Property.</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
             </div>
 
             <div class="col-md-4 text-center">
                 <div class="pr-5">
-                    <span class="text-black">03.</span>
+                    <span>03.</span>
                     <span class="custom-icon flaticon-home text-black"></span>
-                    <h3 class="text-dark">Outstanding Houses.</h3>
-                    <p class="text-black">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h3>Outstanding Houses.</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
             </div>
         </div>

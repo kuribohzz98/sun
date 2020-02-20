@@ -133,7 +133,7 @@ public class ProductResourceIT {
             .quantity(DEFAULT_QUANTITY)
             .productLine(DEFAULT_PRODUCT_LINE)
             .image(DEFAULT_IMAGE)
-            .point(DEFAULT_POINT)
+            .salePrice(DEFAULT_POINT)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT);
         // Add required entity
@@ -175,7 +175,7 @@ public class ProductResourceIT {
             .quantity(UPDATED_QUANTITY)
             .productLine(UPDATED_PRODUCT_LINE)
             .image(UPDATED_IMAGE)
-            .point(UPDATED_POINT)
+            .salePrice(UPDATED_POINT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
         // Add required entity
@@ -231,7 +231,7 @@ public class ProductResourceIT {
         assertThat(testProduct.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testProduct.getProductLine()).isEqualTo(DEFAULT_PRODUCT_LINE);
         assertThat(testProduct.getImage()).isEqualTo(DEFAULT_IMAGE);
-        assertThat(testProduct.getPoint()).isEqualTo(DEFAULT_POINT);
+        assertThat(testProduct.getSalePrice()).isEqualTo(DEFAULT_POINT);
         assertThat(testProduct.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testProduct.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
     }
@@ -433,7 +433,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getProduct() throws Exception {
@@ -489,7 +489,7 @@ public class ProductResourceIT {
             .quantity(UPDATED_QUANTITY)
             .productLine(UPDATED_PRODUCT_LINE)
             .image(UPDATED_IMAGE)
-            .point(UPDATED_POINT)
+            .salePrice(UPDATED_POINT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
         ProductDTO productDTO = productMapper.toDto(updatedProduct);
@@ -512,7 +512,7 @@ public class ProductResourceIT {
         assertThat(testProduct.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testProduct.getProductLine()).isEqualTo(UPDATED_PRODUCT_LINE);
         assertThat(testProduct.getImage()).isEqualTo(UPDATED_IMAGE);
-        assertThat(testProduct.getPoint()).isEqualTo(UPDATED_POINT);
+        assertThat(testProduct.getSalePrice()).isEqualTo(UPDATED_POINT);
         assertThat(testProduct.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testProduct.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
     }

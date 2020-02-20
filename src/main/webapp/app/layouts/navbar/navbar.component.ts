@@ -1,11 +1,12 @@
+import { IProductType } from 'app/shared/model/product-type.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { VERSION } from 'app/app.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { ProductTypeService } from './../../entities/product-type/product-type.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -17,13 +18,14 @@ export class NavbarComponent implements OnInit {
   isNavbarCollapsed = true;
   swaggerEnabled?: boolean;
   version: string;
-
+  productTypes: IProductType[] = [];
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private productTypeService: ProductTypeService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
@@ -32,6 +34,10 @@ export class NavbarComponent implements OnInit {
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;
+    });
+    this.productTypeService.query({ page: 0, size: 100 }).subscribe(res => {
+      this.productTypes = res.body as any[];
+      console.log(this.productTypes);
     });
   }
 

@@ -1,4 +1,4 @@
-<div class="site-mobile-menu site-navbar-target">
+<!-- <div class="site-mobile-menu site-navbar-target">
     <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
             <span class="icon-close2 js-menu-toggle"></span>
@@ -20,12 +20,21 @@
                 <nav class="site-navigation position-relative text-right" role="navigation">
 
                     <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li><a [routerLink]="['']" routerLinkActive="router-link-active" class="nav-link">Trang chủ</a>
+                        <li>
+                            <a [routerLink]="['']" routerLinkActive="router-link-active" class="nav-link">Trang chủ</a>
                         </li>
-                        <li><a href="#" class="nav-link">Sản Phẩm</a></li>
-                        <!-- <li><a href="#" class="nav-link">Agents</a></li> -->
-                        <li><a href="#" class="nav-link">Giỏ Hàng</a></li>
-                        <!-- <li><a href="#" class="nav-link">Thông tin cá nhân</a></li> -->
+                        <li>
+                            <a class="dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản Phẩm</a>
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="site-dropdown-menu" *ngFor="let productType of productTypes">
+                                    <a class="dropdown-item" [routerLink]="'/san-pham/' + productType.code" >{{productType.name}}</a>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a [routerLink]="['gio-hang']" class="nav-link">Giỏ Hàng</a></li>
                         <li><a href="javascript:void(0);" class="alert-link" data-toggle="modal"
                                 data-target="#openlogin">Đăng nhập/ Đăng ký</a></li>
                     </ul>
@@ -40,9 +49,10 @@
         </div>
     </div>
 
-</header>
+</header> -->
+
 <jhi-login-register idModel="openlogin"></jhi-login-register>
-<!-- <nav class="navbar navbar-primary navbar-expand-md bg-primary">
+<nav class="navbar navbar-primary navbar-expand-md bg-primary">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
         <span class="logo-img"></span>
         <span class="navbar-title">Sun</span> <span class="navbar-version">{{version}}</span>
@@ -121,7 +131,7 @@
                     </li>
                 </ul>
             </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li  ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
                         <fa-icon icon="user-plus"></fa-icon>
@@ -220,4 +230,4 @@
             </li>
         </ul>
     </div>
-</nav> -->
+</nav>

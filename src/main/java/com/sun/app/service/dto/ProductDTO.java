@@ -1,8 +1,14 @@
 package com.sun.app.service.dto;
+import com.sun.app.domain.ProductEvaluate;
+import com.sun.app.domain.ProductHistory;
+import com.sun.app.domain.Specifications;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A DTO for the {@link com.sun.app.domain.Product} entity.
@@ -35,13 +41,39 @@ public class ProductDTO implements Serializable {
 
     private String image;
 
-    private Integer point;
+    private Integer salePrice;
 
     @NotNull
     private Instant createdAt;
 
     @NotNull
     private Instant updatedAt;
+
+    private ProductTypeDTO productType;
+
+    private ProviderDTO provider;
+
+    private Set<ProductEvaluateDTO> productEvaluates = new HashSet<>();
+
+    private Set<ProductHistoryDTO> productHistories = new HashSet<>();
+
+    private Set<SpecificationsDTO> specifications = new HashSet<>();
+
+    public ProductTypeDTO getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductTypeDTO productType) {
+        this.productType = productType;
+    }
+
+    public ProviderDTO getProvider() {
+        return provider;
+    }
+
+    public void setProvider(ProviderDTO provider) {
+        this.provider = provider;
+    }
 
     public Long getId() {
         return id;
@@ -123,12 +155,12 @@ public class ProductDTO implements Serializable {
         this.image = image;
     }
 
-    public Integer getPoint() {
-        return point;
+    public Integer getSalePrice() {
+        return salePrice;
     }
 
-    public void setPoint(Integer point) {
-        this.point = point;
+    public void setSalePrice(Integer salePrice) {
+        this.salePrice = salePrice;
     }
 
     public Instant getCreatedAt() {
@@ -168,6 +200,30 @@ public class ProductDTO implements Serializable {
         return Objects.hashCode(getId());
     }
 
+    public Set<ProductEvaluateDTO> getProductEvaluates() {
+        return productEvaluates;
+    }
+
+    public void setProductEvaluates(Set<ProductEvaluateDTO> productEvaluates) {
+        this.productEvaluates = productEvaluates;
+    }
+
+    public Set<ProductHistoryDTO> getProductHistories() {
+        return productHistories;
+    }
+
+    public void setProductHistories(Set<ProductHistoryDTO> productHistories) {
+        this.productHistories = productHistories;
+    }
+
+    public Set<SpecificationsDTO> getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(Set<SpecificationsDTO> specifications) {
+        this.specifications = specifications;
+    }
+
     @Override
     public String toString() {
         return "ProductDTO{" +
@@ -181,11 +237,9 @@ public class ProductDTO implements Serializable {
             ", quantity=" + getQuantity() +
             ", productLine='" + getProductLine() + "'" +
             ", image='" + getImage() + "'" +
-            ", point=" + getPoint() +
+            ", salePrice=" + getSalePrice() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +
-            ", productTypeId=" + getProductTypeId() +
-            ", providerId=" + getProviderId() +
             "}";
     }
 }

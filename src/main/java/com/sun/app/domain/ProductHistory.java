@@ -48,7 +48,7 @@ public class ProductHistory implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @NotNull
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Product product;

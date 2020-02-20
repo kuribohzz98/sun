@@ -1,3 +1,4 @@
+import { FileUploadService } from './../../service/fileUpload.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,6 +29,8 @@ export class ProductUpdateComponent implements OnInit {
 
   providers: IProvider[] = [];
 
+  fileToUpload: any;
+
   editForm = this.fb.group({
     id: [],
     productTypeId: [null, [Validators.required]],
@@ -49,7 +52,8 @@ export class ProductUpdateComponent implements OnInit {
     protected productTypeService: ProductTypeService,
     protected providerService: ProviderService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private fileUploadService: FileUploadService
   ) {}
 
   ngOnInit(): void {
@@ -131,11 +135,18 @@ export class ProductUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const product = this.createFromForm();
-    if (product.id !== undefined) {
-      this.subscribeToSaveResponse(this.productService.update(product));
-    } else {
-      this.subscribeToSaveResponse(this.productService.create(product));
-    }
+    console.log(product);
+    this.fileUploadService.uploadOneFile(this.fileToUpload).subscribe(console.log);
+    // if (product.id !== undefined) {
+    //   this.subscribeToSaveResponse(this.productService.update(product));
+    // } else {
+    //   this.subscribeToSaveResponse(this.productService.create(product));
+    // }
+  }
+
+  handleFileInput(files: FileList): void {
+    this.fileToUpload = files.item(0);
+    console.log(files.item(0));
   }
 
   private createFromForm(): IProduct {

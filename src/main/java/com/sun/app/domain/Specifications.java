@@ -42,8 +42,7 @@ public class Specifications implements Serializable {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable=false, updatable=false)
     private Product product;
 
@@ -118,11 +117,6 @@ public class Specifications implements Serializable {
 
     public Product getProduct() {
         return product;
-    }
-
-    public Specifications product(Product product) {
-        this.product = product;
-        return this;
     }
 
     public void setProduct(Product product) {

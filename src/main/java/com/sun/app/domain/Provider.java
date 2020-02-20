@@ -33,6 +33,13 @@ public class Provider implements Serializable {
     @OneToMany(mappedBy = "provider")
     private Set<Product> products = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "product_type_provider",
+        joinColumns = @JoinColumn(name = "provider_id", referencedColumnName = "id", insertable=false, updatable=false),
+        inverseJoinColumns = @JoinColumn(name = "product_type_id", referencedColumnName = "id", insertable=false, updatable=false))
+    private Set<ProductType> productTypes = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -76,6 +83,13 @@ public class Provider implements Serializable {
         this.products = products;
     }
 
+    public Set<ProductType> getProductTypes() {
+        return productTypes;
+    }
+
+    public void setProductTypes(Set<ProductType> productTypes) {
+        this.productTypes = productTypes;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

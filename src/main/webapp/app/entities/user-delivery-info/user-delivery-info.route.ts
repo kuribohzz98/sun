@@ -38,7 +38,7 @@ export const userDeliveryInfoRoute: Routes = [
     path: '',
     component: UserDeliveryInfoComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      // authorities: ['ROLE_USER'],
       pageTitle: 'UserDeliveryInfos'
     },
     canActivate: [UserRouteAccessService]
@@ -50,7 +50,7 @@ export const userDeliveryInfoRoute: Routes = [
       userDeliveryInfo: UserDeliveryInfoResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      // authorities: ['ROLE_USER'],
       pageTitle: 'UserDeliveryInfos'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +62,7 @@ export const userDeliveryInfoRoute: Routes = [
       userDeliveryInfo: UserDeliveryInfoResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      // authorities: ['ROLE_USER'],
       pageTitle: 'UserDeliveryInfos'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +74,7 @@ export const userDeliveryInfoRoute: Routes = [
       userDeliveryInfo: UserDeliveryInfoResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      // authorities: ['ROLE_USER'],
       pageTitle: 'UserDeliveryInfos'
     },
     canActivate: [UserRouteAccessService]

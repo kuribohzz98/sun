@@ -1,5 +1,6 @@
 package com.sun.app.web.rest;
 
+import com.sun.app.domain.ProductEvaluate;
 import com.sun.app.service.ProductEvaluateService;
 import com.sun.app.web.rest.errors.BadRequestAlertException;
 import com.sun.app.service.dto.ProductEvaluateDTO;
@@ -94,9 +95,9 @@ public class ProductEvaluateResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of productEvaluates in body.
      */
     @GetMapping("/product-evaluates")
-    public ResponseEntity<List<ProductEvaluateDTO>> getAllProductEvaluates(Pageable pageable) {
+    public ResponseEntity<List<ProductEvaluate>> getAllProductEvaluates(Pageable pageable) {
         log.debug("REST request to get a page of ProductEvaluates");
-        Page<ProductEvaluateDTO> page = productEvaluateService.findAll(pageable);
+        Page<ProductEvaluate> page = productEvaluateService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -125,5 +126,12 @@ public class ProductEvaluateResource {
         log.debug("REST request to delete ProductEvaluate : {}", id);
         productEvaluateService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/product-evaluates/get")
+    public ResponseEntity<List<ProductEvaluate>> getProductEvaluateByOptions(@RequestParam Long productId, Pageable pageable) {
+        Page<ProductEvaluate> page = productEvaluateService.findAllByProductId(productId, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 }

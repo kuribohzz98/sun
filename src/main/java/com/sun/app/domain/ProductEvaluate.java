@@ -165,6 +165,8 @@ public class ProductEvaluate implements Serializable {
             ", point=" + getPoint() +
             ", evaluate='" + getEvaluate() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
+            ", user='" + getUser() + "'" +
+            ", product='" + getProduct() + "'" +
             "}";
     }
 }

@@ -12,7 +12,6 @@ import org.mapstruct.*;
 public interface ProductEvaluateMapper extends EntityMapper<ProductEvaluateDTO, ProductEvaluate> {
 
     @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "product.id", target = "productId")
     ProductEvaluateDTO toDto(ProductEvaluate productEvaluate);
 

@@ -4,14 +4,20 @@ import com.sun.app.domain.Product;
 import com.sun.app.repository.ProductRepository;
 import com.sun.app.service.dto.ProductDTO;
 import com.sun.app.service.mapper.ProductMapper;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 /**
@@ -25,7 +31,11 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    @Autowired
     private final ProductMapper productMapper;
+
+    @Autowired
+    ResourceLoader resourceLoader;
 
     public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
@@ -52,9 +62,68 @@ public class ProductService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
+    public Page<ProductDTO> findAll(
+        Pageable pageable,
+        Integer salePrice,
+        Integer productTypeId,
+        Integer providerId,
+        Integer maxSellPrice,
+        Integer minSellPrice
+    ) {
         log.debug("Request to get all Products");
-        return productRepository.findAll(pageable)
+        Page<Product> page;
+        if (productTypeId != null) {
+            if (providerId != null) {
+                if (maxSellPrice != null && minSellPrice != null) {
+                    page = productRepository.findAllByProductTypeIdAndProviderIdAndSellPriceBetween(
+                        productTypeId,
+                        providerId,
+                        minSellPrice,
+                        maxSellPrice,
+                        pageable
+                    );
+                } else {
+                    page = productRepository.findAllByProductTypeIdAndProviderId(
+                        productTypeId,
+                        providerId,
+                        pageable
+                    );
+                }
+            } else {
+                if (maxSellPrice != null && minSellPrice != null) {
+                    page = productRepository.findAllByProductTypeIdAndSellPriceBetween(
+                        productTypeId,
+                        minSellPrice,
+                        maxSellPrice,
+                        pageable
+                    );
+                } else {
+                    page = productRepository.findAllByProductTypeId(productTypeId, pageable);
+                }
+            }
+        } else if (salePrice != null) {
+            page = productRepository.findAllBySalePriceGreaterThan(salePrice, pageable);
+        } else {
+            page = productRepository.findAll(pageable);
+        }
+        return page.map(productMapper::toDto).map(productDTO -> {
+                InputStream in = ProductService.class.getClassLoader()
+                    .getResourceAsStream("assest/upload/"+ productDTO.getImage());
+                if(in == null) return productDTO;
+                byte[] media = new byte[0];
+                try {
+                    media = IOUtils.toByteArray(in);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                productDTO.setImage(Base64.encode(media));
+                return productDTO;
+            });
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<ProductDTO> findOneByCode(String code) {
+        return productRepository.findOneByCode(code)
             .map(productMapper::toDto);
     }
 

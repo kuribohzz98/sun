@@ -21,12 +21,29 @@ public class ProductEvaluateDTO implements Serializable {
     @NotNull
     private Instant createdAt;
 
-
     private Long userId;
 
-    private String userLogin;
-
     private Long productId;
+
+//    public UserDTO getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(UserDTO user) {
+//        this.user = user;
+//    }
+
+//    public ProductDTO getProduct() {
+//        return product;
+//    }
+
+//    public void setProduct(ProductDTO product) {
+//        this.product = product;
+//    }
+
+//    private UserDTO user;
+
+//    private ProductDTO product;
 
     public Long getId() {
         return id;
@@ -68,14 +85,6 @@ public class ProductEvaluateDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
-
     public Long getProductId() {
         return productId;
     }
@@ -112,9 +121,8 @@ public class ProductEvaluateDTO implements Serializable {
             ", point=" + getPoint() +
             ", evaluate='" + getEvaluate() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
-            ", userId=" + getUserId() +
-            ", userLogin='" + getUserLogin() + "'" +
-            ", productId=" + getProductId() +
+//            ", product=" + getProduct() +
+//            ", user=" + getUser() +
             "}";
     }
 }

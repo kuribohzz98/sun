@@ -52,10 +52,9 @@ public class ProductEvaluateService {
      * @return the list of entities.
      */
     @Transactional(readOnly = true)
-    public Page<ProductEvaluateDTO> findAll(Pageable pageable) {
+    public Page<ProductEvaluate> findAll(Pageable pageable) {
         log.debug("Request to get all ProductEvaluates");
-        return productEvaluateRepository.findAll(pageable)
-            .map(productEvaluateMapper::toDto);
+        return productEvaluateRepository.findAll(pageable);
     }
 
 
@@ -80,5 +79,9 @@ public class ProductEvaluateService {
     public void delete(Long id) {
         log.debug("Request to delete ProductEvaluate : {}", id);
         productEvaluateRepository.deleteById(id);
+    }
+
+    public Page<ProductEvaluate> findAllByProductId(Long id, Pageable page) {
+        return productEvaluateRepository.findAllByProductId(id, page);
     }
 }

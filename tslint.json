@@ -12,7 +12,7 @@
     "use-pipe-transform-interface": false,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "no-inferrable-types": false,
+    "no-inferrable-types": true,
     "typedef": [true, "call-signature"]
   }
 }

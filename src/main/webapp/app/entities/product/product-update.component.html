@@ -107,8 +107,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_image">Image</label>
-                    <input type="text" class="form-control" name="image" id="field_image"
-                           formControlName="image"/>
+                    <input type="file" class="form-control" name="image" id="field_image"
+                           formControlName="image" (change)="handleFileInput($event.target.files)" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_point">Point</label>
@@ -152,7 +152,7 @@
                     <label class="form-control-label" for="field_productType">Product Type</label>
                     <select class="form-control" id="field_productType" name="productType" formControlName="productTypeId">
                         <option *ngIf="!editForm.get('productTypeId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="productTypeOption.id" *ngFor="let productTypeOption of producttypes; trackBy: trackById">{{productTypeOption.id}}</option>
+                        <option [ngValue]="productTypeOption.id" *ngFor="let productTypeOption of producttypes; trackBy: trackById">{{productTypeOption.name}}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('productTypeId')!.invalid && (editForm.get('productTypeId')!.dirty || editForm.get('productTypeId')!.touched)">
@@ -165,7 +165,7 @@
                     <label class="form-control-label" for="field_provider">Provider</label>
                     <select class="form-control" id="field_provider" name="provider" formControlName="providerId">
                         <option *ngIf="!editForm.get('providerId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="providerOption.id" *ngFor="let providerOption of providers; trackBy: trackById">{{providerOption.id}}</option>
+                        <option [ngValue]="providerOption.id" *ngFor="let providerOption of providers; trackBy: trackById">{{providerOption.name}}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('providerId')!.invalid && (editForm.get('providerId')!.dirty || editForm.get('providerId')!.touched)">

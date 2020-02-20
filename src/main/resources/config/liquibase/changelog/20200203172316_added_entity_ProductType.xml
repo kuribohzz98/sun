@@ -27,7 +27,24 @@
     </changeSet>
 
     <changeSet id="20200203172316-1-relations" author="jhipster">
-
+        <createTable tableName="product_type_provider">
+            <column name="product_type_id" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="provider_id" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="provider_id"
+                                 baseTableName="product_type_provider"
+                                 constraintName="fk_product_type_provider_provider_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="provider"/>
+        <addForeignKeyConstraint baseColumnNames="product_type_id"
+                                 baseTableName="product_type_provider"
+                                 constraintName="fk_product_type_provider_product_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_type"/>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 

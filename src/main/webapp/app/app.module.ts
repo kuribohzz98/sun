@@ -15,6 +15,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ModuleComponentModule } from './module/module-component.module';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
+import { NotifierModule } from 'angular-notifier';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { LoginRegisterComponent } from './core/login-register/login-register.com
     // jhipster-needle-angular-add-module JHipster will add new module here
     SunEntityModule,
     SunAppRoutingModule,
-    AccountModule
+    AccountModule,
+    NotifierModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, LoginRegisterComponent],
   bootstrap: [MainComponent]
