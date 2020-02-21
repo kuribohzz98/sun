@@ -26,12 +26,9 @@ public class PaymentDTO implements Serializable {
     @NotNull
     private String deliveryAddress;
 
-    @NotNull
     private Instant createdAt;
 
-    @NotNull
     private Instant updatedAt;
-
 
     private Set<ProductDTO> products = new HashSet<>();
 

@@ -33,7 +33,7 @@ public class ProductType implements Serializable {
     @OneToMany(mappedBy = "productType")
     private Set<Product> products = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "product_type_provider",
         joinColumns = @JoinColumn(name = "product_type_id", referencedColumnName = "id", insertable=false, updatable=false),
@@ -115,6 +115,7 @@ public class ProductType implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
+            ", providers='" + getProviders() + "'" +
             "}";
     }
 }

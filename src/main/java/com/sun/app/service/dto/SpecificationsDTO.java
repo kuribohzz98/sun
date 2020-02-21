@@ -17,12 +17,9 @@ public class SpecificationsDTO implements Serializable {
     @NotNull
     private String content;
 
-    @NotNull
     private Instant createdAt;
 
-    @NotNull
     private Instant updatedAt;
-
 
     private Long productId;
 

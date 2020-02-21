@@ -1,8 +1,12 @@
 package com.sun.app.service.dto;
 
+import com.sun.app.domain.Provider;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class ProductTypeDTO implements Serializable {
     private Long id;

@@ -34,8 +34,6 @@ export class PaymentUpdateComponent implements OnInit {
     status: [null, [Validators.required]],
     recipientPhone: [null, [Validators.required]],
     deliveryAddress: [null, [Validators.required]],
-    createdAt: [null, [Validators.required]],
-    updatedAt: [null, [Validators.required]],
     products: [null, Validators.required],
     userId: [null, Validators.required]
   });
@@ -79,8 +77,6 @@ export class PaymentUpdateComponent implements OnInit {
       status: payment.status,
       recipientPhone: payment.recipientPhone,
       deliveryAddress: payment.deliveryAddress,
-      createdAt: payment.createdAt != null ? payment.createdAt.format(DATE_TIME_FORMAT) : null,
-      updatedAt: payment.updatedAt != null ? payment.updatedAt.format(DATE_TIME_FORMAT) : null,
       products: payment.products,
       userId: payment.userId
     });
@@ -108,10 +104,8 @@ export class PaymentUpdateComponent implements OnInit {
       status: this.editForm.get(['status'])!.value,
       recipientPhone: this.editForm.get(['recipientPhone'])!.value,
       deliveryAddress: this.editForm.get(['deliveryAddress'])!.value,
-      createdAt:
-        this.editForm.get(['createdAt'])!.value != null ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedAt:
-        this.editForm.get(['updatedAt'])!.value != null ? moment(this.editForm.get(['updatedAt'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdAt: moment(),
+      updatedAt: moment(),
       products: this.editForm.get(['products'])!.value,
       userId: this.editForm.get(['userId'])!.value
     };

@@ -47,11 +47,9 @@ public class Payment implements Serializable {
     @Column(name = "delivery_address", nullable = false)
     private String deliveryAddress;
 
-    @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    @NotNull
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 

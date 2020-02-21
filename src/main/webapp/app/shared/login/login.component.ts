@@ -67,7 +67,6 @@ export class LoginModalComponent implements AfterViewInit {
             message: 'Đăng nhập thành công',
             id: 'login_success'
           });
-          this.router.navigate(['']);
           this.modalService.dismissAll();
         },
         () => {

@@ -1,5 +1,5 @@
+import { ProductTypeService } from './../../service/product-type.service';
 import { ProductType } from 'app/shared/model/product-type.model';
-import { ProductTypeService } from '../../entities/product-type/product-type.service';
 import { IProductType } from '../../shared/model/product-type.model';
 import { Product } from 'app/shared/model/product.model';
 import { HttpResponse } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ProductTypeResolve implements Resolve<IProductType> {
-  constructor(private productTypeService: ProductTypeService, private productService: ProductService, private router: Router) {}
+  constructor(private productTypeService: ProductTypeService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<IProductType> | Observable<never> {
     const code = route.params['sanpham'];

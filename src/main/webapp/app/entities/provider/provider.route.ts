@@ -42,7 +42,7 @@ export const providerRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'Providers'
     },
@@ -55,7 +55,7 @@ export const providerRoute: Routes = [
       provider: ProviderResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Providers'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +67,7 @@ export const providerRoute: Routes = [
       provider: ProviderResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Providers'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +79,7 @@ export const providerRoute: Routes = [
       provider: ProviderResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Providers'
     },
     canActivate: [UserRouteAccessService]

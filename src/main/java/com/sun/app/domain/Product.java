@@ -60,11 +60,9 @@ public class Product implements Serializable {
     @Column(name = "sale_price")
     private Integer salePrice;
 
-    @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    @NotNull
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 

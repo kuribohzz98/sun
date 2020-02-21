@@ -42,7 +42,7 @@ export const productTypeRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'ProductTypes'
     },
@@ -55,7 +55,7 @@ export const productTypeRoute: Routes = [
       productType: ProductTypeResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'ProductTypes'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +67,7 @@ export const productTypeRoute: Routes = [
       productType: ProductTypeResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'ProductTypes'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +79,7 @@ export const productTypeRoute: Routes = [
       productType: ProductTypeResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'ProductTypes'
     },
     canActivate: [UserRouteAccessService]

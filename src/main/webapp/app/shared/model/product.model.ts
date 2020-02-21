@@ -1,3 +1,4 @@
+import { IProductEvaluate } from './product-evaluate.model';
 import { Moment } from 'moment';
 
 export interface IProduct {
@@ -8,12 +9,14 @@ export interface IProduct {
   code?: string;
   sellPrice?: number;
   importPrice?: number;
+  salePrice?: number;
   quantity?: number;
   productLine?: string;
   image?: string;
   point?: number;
   createdAt?: Moment;
   updatedAt?: Moment;
+  productEvaluates?: IProductEvaluate[];
 }
 
 export class Product implements IProduct {

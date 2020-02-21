@@ -26,16 +26,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByProductTypeIdAndSellPriceBetween(
         Integer productTypeId,
-        Integer sellPriceStart,
-        Integer sellPriceEnd,
+        Long sellPriceStart,
+        Long sellPriceEnd,
         Pageable pageable
     );
 
     Page<Product> findAllByProductTypeIdAndProviderIdAndSellPriceBetween(
         Integer productTypeId,
         Integer providerId,
-        Integer sellPriceStart,
-        Integer sellPriceEnd,
+        Long sellPriceStart,
+        Long sellPriceEnd,
         Pageable pageable
     );
 }

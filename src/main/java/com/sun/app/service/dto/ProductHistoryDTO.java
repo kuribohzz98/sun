@@ -21,10 +21,8 @@ public class ProductHistoryDTO implements Serializable {
 
     private String description;
 
-    @NotNull
     private Instant createdAt;
 
-    @NotNull
     private Instant updatedAt;
 
 

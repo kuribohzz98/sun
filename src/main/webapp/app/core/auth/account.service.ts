@@ -35,6 +35,10 @@ export class AccountService {
     return this.userIdentity.authorities.some((authority: string) => authorities.includes(authority));
   }
 
+  getUserIdentity(): Account | null {
+    return this.userIdentity;
+  }
+
   identity(force?: boolean): Observable<Account | null> {
     if (!this.accountCache$ || force || !this.isAuthenticated()) {
       this.accountCache$ = this.fetch().pipe(
@@ -59,7 +63,7 @@ export class AccountService {
   }
 
   isAdmin(): boolean {
-    return this.userIdentity !== null && !!this.userIdentity.authorities.length && this.userIdentity.authorities.includes('ADMIN');
+    return this.userIdentity !== null && !!this.userIdentity.authorities.length && this.userIdentity.authorities.includes('ROLE_ADMIN');
   }
 
   getAuthenticationState(): Observable<Account | null> {

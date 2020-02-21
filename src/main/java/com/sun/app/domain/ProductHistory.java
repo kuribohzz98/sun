@@ -40,11 +40,9 @@ public class ProductHistory implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    @NotNull
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 

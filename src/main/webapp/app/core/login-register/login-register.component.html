@@ -8,7 +8,7 @@
     <div class="modal-header">
         <h5 *ngIf="isLogin" class="modal-title" id="modalLabel">Đăng nhập</h5>
         <h5 *ngIf="!isLogin" class="modal-title" id="modalLabel">Đăng ký</h5>
-        <button type="button" class="close" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismissAll()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>

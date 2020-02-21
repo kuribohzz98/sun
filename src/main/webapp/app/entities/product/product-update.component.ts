@@ -43,9 +43,7 @@ export class ProductUpdateComponent implements OnInit {
     quantity: [null, [Validators.required]],
     productLine: [],
     image: [],
-    point: [],
-    createdAt: [null, [Validators.required]],
-    updatedAt: [null, [Validators.required]]
+    salePrice: []
   });
 
   constructor(
@@ -123,9 +121,7 @@ export class ProductUpdateComponent implements OnInit {
       quantity: product.quantity,
       productLine: product.productLine,
       image: product.image,
-      point: product.point,
-      createdAt: product.createdAt != null ? product.createdAt.format(DATE_TIME_FORMAT) : null,
-      updatedAt: product.updatedAt != null ? product.updatedAt.format(DATE_TIME_FORMAT) : null
+      salePrice: product.salePrice
     });
   }
 
@@ -166,11 +162,9 @@ export class ProductUpdateComponent implements OnInit {
       quantity: this.editForm.get(['quantity'])!.value,
       productLine: this.editForm.get(['productLine'])!.value,
       image: nameFile,
-      point: this.editForm.get(['point'])!.value,
-      createdAt:
-        this.editForm.get(['createdAt'])!.value != null ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedAt:
-        this.editForm.get(['updatedAt'])!.value != null ? moment(this.editForm.get(['updatedAt'])!.value, DATE_TIME_FORMAT) : undefined
+      salePrice: this.editForm.get(['salePrice'])!.value,
+      createdAt: moment(),
+      updatedAt: moment()
     };
   }
 

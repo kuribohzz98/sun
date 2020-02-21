@@ -39,7 +39,6 @@ public class ProductEvaluate implements Serializable {
     @Column(name = "evaluate")
     private String evaluate;
 
-    @NotNull
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 

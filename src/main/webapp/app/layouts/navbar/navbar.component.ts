@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   swaggerEnabled?: boolean;
   version: string;
   productTypes: IProductType[] = [];
+
   constructor(
     private loginService: LoginService,
     private accountService: AccountService,

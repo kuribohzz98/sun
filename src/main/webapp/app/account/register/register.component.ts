@@ -1,3 +1,4 @@
+import { NotifierService } from 'angular-notifier';
 import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -36,7 +37,8 @@ export class RegisterComponent implements AfterViewInit {
     private loginModalService: LoginModalService,
     private registerService: RegisterService,
     private renderer: Renderer,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notiferService: NotifierService
   ) {}
 
   ngAfterViewInit(): void {
@@ -58,7 +60,14 @@ export class RegisterComponent implements AfterViewInit {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
       this.registerService.save({ login, email, password, langKey: 'en' }).subscribe(
-        () => (this.success = true),
+        () => {
+          this.notiferService.show({
+            type: 'success',
+            message: 'Tạo tài khoản thành công',
+            id: 'register-success'
+          });
+          this.success = true;
+        },
         response => this.processError(response)
       );
     }

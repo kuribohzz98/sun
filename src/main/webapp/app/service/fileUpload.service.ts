@@ -1,10 +1,7 @@
 import { map } from 'rxjs/operators';
-import { HttpResponse, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProduct } from './../shared/model/product.model';
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
-import * as uuid from 'uuid/v4';
 
 @Injectable({ providedIn: 'root' })
 export class FileUploadService {

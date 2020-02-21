@@ -99,8 +99,8 @@ public class ProductResource {
         @RequestParam(required = false) Integer salePrice,
         @RequestParam(required = false) Integer productTypeId,
         @RequestParam(required = false) Integer providerId,
-        @RequestParam(required = false) Integer maxSellPrice,
-        @RequestParam(required = false) Integer minSellPrice,
+        @RequestParam(required = false) Long maxSellPrice,
+        @RequestParam(required = false) Long minSellPrice,
         Pageable pageable
     ) {
         log.debug("REST request to get a page of Products");

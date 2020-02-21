@@ -1,4 +1,5 @@
-<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
+<div *ngIf="!isAdmin()">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
     data-aos="fade">
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -33,16 +34,18 @@
                                 <div class="comment-body col-md-8">
                                     <h3>{{product.name}}</h3>
                                     <div class="meta">{{product.code}}</div>
+                                    <div>Số lượng còn: {{product.maxquantity}}</div>
                                 </div>
                                 <div class="col-md-2 text-danger">
                                     <ng-container *ngIf="product.salePrice; else priceProduct">
-                                        <p style="color: black;"><del>{{product.sellPrice * product.amount | number}}đ</del></p>
-                                        <p>{{product.salePrice * product.amount | number}}đ</p>
+                                        <p style="color: black;">
+                                            <del>{{product.sellPrice * product.quantity | number}}đ</del></p>
+                                        <p>{{product.salePrice * product.quantity | number}}đ</p>
                                     </ng-container>
                                     <ng-template #priceProduct>
-                                        <p>{{product.sellPrice * product.amount | number}}đ</p>
+                                        <p>{{product.sellPrice * product.quantity | number}}đ</p>
                                     </ng-template>
-                                    
+
                                 </div>
                                 <div class="col-md-2">
                                     <Button class="btn" (click)="removeItem(i)">
@@ -52,12 +55,15 @@
                             </div>
                             <div class="comment-body row-md">
                                 <div class="align-items-center col" style="margin-top: 1rem">
-                                    <button [disabled]="product.amount <= 1" class="btn btn-secondary" style="display: inline;" (click)="addAmount(i, product.amount - 1)">
+                                    <button [disabled]="product.quantity <= 1" class="btn btn-secondary"
+                                        style="display: inline;" (click)="addAmount(i, product.quantity - 1)">
                                         <fa-icon [icon]="faMinus"></fa-icon>
                                     </button>
                                     <p class="align-self-center"
-                                        style="display: inline; margin-left: 1rem; margin-right: 1rem;">{{product.amount}}</p>
-                                    <button class="btn btn-secondary" style="display: inline;" (click)="addAmount(i, product.amount + 1)">
+                                        style="display: inline; margin-left: 1rem; margin-right: 1rem;">
+                                        {{product.quantity}}</p>
+                                    <button [disabled]="product.quantity >= product.maxquantity" class="btn btn-secondary" style="display: inline;"
+                                        (click)="addAmount(i, product.quantity + 1)">
                                         <fa-icon [icon]="faPlus"></fa-icon>
                                     </button>
                                 </div>
@@ -69,7 +75,8 @@
         </div>
         <div *ngIf="!products.length" class="text-center" style="margin-bottom: 100px;">
             <div class="text-danger">
-                <p style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">Chưa có sản phẩm nào trong giỏ hàng</p>
+                <p style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">Chưa có sản phẩm nào trong giỏ
+                    hàng</p>
             </div>
             <button class="btn btn-primary" (click)="backPage()">
                 <fa-icon [icon]="faAngleDoubleLeft"></fa-icon>&nbsp;&nbsp;&nbsp;Quay lại mua hàng
@@ -102,7 +109,7 @@
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                         aria-labelledby="v-pills-home-tab">
-                        <form class="form" role="form" [formGroup]="formPayment">
+                        <form (ngSubmit)="submitPayment()" [formGroup]="formHouse">
                             <div class="text-success"
                                 style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">Thông tin khách hàng
                             </div>
@@ -124,9 +131,6 @@
                             <div class="row" style="padding-left: 20px; padding-right: 20px;">
                                 <div class="col-md-6">
                                     <label for="city">Tỉnh, thành phố</label>
-                                    <!-- <input id="city" type="text" class="form-control" [(ngModel)]="model"
-                                        [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
-                                        (click)="click$.next($event.target.value)" #instance /> -->
                                     <input type="city" class="form-control" id="city" placeholder="Tỉnh, Thành phố"
                                         formControlName="city">
                                 </div>
@@ -162,7 +166,7 @@
                     </div>
                     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                         aria-labelledby="v-pills-profile-tab">
-                        <form class="form" role="form" [formGroup]="formSuperMarket">
+                        <form (ngSubmit)="submitSuperMarket()" [formGroup]="formSuperMarket">
                             <div class="text-success"
                                 style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">Thông tin khách
                                 hàng
@@ -170,28 +174,14 @@
                             <div class="row" style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
                                 <div class="form-group col-md-6">
                                     <label for="nameHouse">Họ và tên</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Họ và tên"
+                                    <input type="text" class="form-control" id="nameHouse" placeholder="Họ và tên"
                                         formControlName="name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="phoneHouse">Số điện thoại</label>
-                                    <input type="phone" class="form-control" id="phoneHouse"
-                                        placeholder="Số điện thoại" formControlName="phone">
+                                    <input type="phone" class="form-control" id="phoneHouse" placeholder="Số điện thoại"
+                                        formControlName="phone">
                                 </div>
-                            </div>
-                            <div class="text-success"
-                                style="font-size: 30px; font-family: Arial, Helvetica, sans-serif;">
-                                Thông tin đặt hàng
-                            </div>
-                            <div class="form-group" style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
-                                <label for="address">Địa chỉ cửa hàng</label>
-                                <input type="text" class="form-control" id="address" placeholder="Địa chỉ cửa hàng"
-                                    formControlName="address">
-                            </div>
-                            <div class="form-group" style="padding-left: 20px; padding-right: 20px; margin-top: 10px;">
-                                <label for="date">Ngày nhận hàng</label>
-                                <input type="text" class="form-control" id="date" placeholder="Ngày nhận hàng"
-                                    formControlName="date">
                             </div>
                             <div>
                                 <button style="margin-top: 10px;" type="submit"
@@ -205,4 +195,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -1,9 +1,13 @@
 package com.sun.app.service;
 
 import com.sun.app.domain.Payment;
+import com.sun.app.domain.Product;
 import com.sun.app.repository.PaymentRepository;
+import com.sun.app.repository.ProductRepository;
 import com.sun.app.service.dto.PaymentDTO;
+import com.sun.app.service.dto.ProductDTO;
 import com.sun.app.service.mapper.PaymentMapper;
+import com.sun.app.service.mapper.ProductMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service Implementation for managing {@link Payment}.
@@ -27,9 +32,15 @@ public class PaymentService {
 
     private final PaymentMapper paymentMapper;
 
-    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper) {
+    private final ProductRepository productRepository;
+
+    private final ProductMapper productMapper;
+
+    public PaymentService(PaymentRepository paymentRepository, PaymentMapper paymentMapper, ProductRepository productRepository, ProductMapper productMapper) {
         this.paymentRepository = paymentRepository;
         this.paymentMapper = paymentMapper;
+        this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     /**
@@ -40,6 +51,16 @@ public class PaymentService {
      */
     public PaymentDTO save(PaymentDTO paymentDTO) {
         log.debug("Request to save Payment : {}", paymentDTO);
+        Set<ProductDTO> productListDto = paymentDTO.getProducts();
+        for (ProductDTO productDto: productListDto) {
+            Optional<Product> product = productRepository.findById(productDto.getId());
+            product.map(productMapper::toDto).map(productDTO -> {
+                productDTO.setQuantity(productDTO.getQuantity() - productDto.getQuantity());
+                productRepository.save(productMapper.toEntity(productDTO));
+                return productDTO;
+            });
+        }
+
         Payment payment = paymentMapper.toEntity(paymentDTO);
         payment = paymentRepository.save(payment);
         return paymentMapper.toDto(payment);
@@ -66,7 +87,7 @@ public class PaymentService {
     public Page<PaymentDTO> findAllWithEagerRelationships(Pageable pageable) {
         return paymentRepository.findAllWithEagerRelationships(pageable).map(paymentMapper::toDto);
     }
-    
+
 
     /**
      * Get one payment by id.

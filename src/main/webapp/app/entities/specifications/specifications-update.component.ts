@@ -26,8 +26,6 @@ export class SpecificationsUpdateComponent implements OnInit {
     id: [],
     title: [null, [Validators.required]],
     content: [null, [Validators.required]],
-    createdAt: [null, [Validators.required]],
-    updatedAt: [null, [Validators.required]],
     productId: [null, Validators.required]
   });
 
@@ -73,8 +71,6 @@ export class SpecificationsUpdateComponent implements OnInit {
       id: specifications.id,
       title: specifications.title,
       content: specifications.content,
-      createdAt: specifications.createdAt != null ? specifications.createdAt.format(DATE_TIME_FORMAT) : null,
-      updatedAt: specifications.updatedAt != null ? specifications.updatedAt.format(DATE_TIME_FORMAT) : null,
       productId: specifications.productId
     });
   }
@@ -99,10 +95,8 @@ export class SpecificationsUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
       content: this.editForm.get(['content'])!.value,
-      createdAt:
-        this.editForm.get(['createdAt'])!.value != null ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
-      updatedAt:
-        this.editForm.get(['updatedAt'])!.value != null ? moment(this.editForm.get(['updatedAt'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdAt: moment(),
+      updatedAt: moment(),
       productId: this.editForm.get(['productId'])!.value
     };
   }

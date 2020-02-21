@@ -43,10 +43,8 @@ public class ProductDTO implements Serializable {
 
     private Integer salePrice;
 
-    @NotNull
     private Instant createdAt;
 
-    @NotNull
     private Instant updatedAt;
 
     private ProductTypeDTO productType;

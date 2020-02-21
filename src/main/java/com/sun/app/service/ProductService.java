@@ -67,8 +67,8 @@ public class ProductService {
         Integer salePrice,
         Integer productTypeId,
         Integer providerId,
-        Integer maxSellPrice,
-        Integer minSellPrice
+        Long maxSellPrice,
+        Long minSellPrice
     ) {
         log.debug("Request to get all Products");
         Page<Product> page;
@@ -128,8 +128,25 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public Optional<ProductDTO> findOneByCode(String code) {
-        return productRepository.findOneByCode(code)
-            .map(productMapper::toDto);
+        return productRepository.findOneByCode(code).map(productMapper::toDto)
+            .map(productDTO -> {
+                InputStream in = ProductService.class.getClassLoader()
+                    .getResourceAsStream("assest/upload/"+ productDTO.getImage());
+                if(in == null) return productDTO;
+                byte[] media = new byte[0];
+                try {
+                    media = IOUtils.toByteArray(in);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                productDTO.setImage(Base64.encode(media));
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return productDTO;
+            });
     }
 
 
@@ -142,8 +159,25 @@ public class ProductService {
     @Transactional(readOnly = true)
     public Optional<ProductDTO> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
-        return productRepository.findById(id)
-            .map(productMapper::toDto);
+        return productRepository.findById(id).map(productMapper::toDto)
+            .map(productDTO -> {
+            InputStream in = ProductService.class.getClassLoader()
+                .getResourceAsStream("assest/upload/"+ productDTO.getImage());
+            if(in == null) return productDTO;
+            byte[] media = new byte[0];
+            try {
+                media = IOUtils.toByteArray(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            productDTO.setImage(Base64.encode(media));
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return productDTO;
+        });
     }
 
     /**

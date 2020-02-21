@@ -32,7 +32,6 @@ export class ProductEvaluateUpdateComponent implements OnInit {
     id: [],
     point: [null, [Validators.required, Validators.min(0), Validators.max(5)]],
     evaluate: [],
-    createdAt: [null, [Validators.required]],
     userId: [null, Validators.required],
     productId: [null, Validators.required]
   });
@@ -89,7 +88,6 @@ export class ProductEvaluateUpdateComponent implements OnInit {
       id: productEvaluate.id,
       point: productEvaluate.point,
       evaluate: productEvaluate.evaluate,
-      createdAt: productEvaluate.createdAt != null ? productEvaluate.createdAt.format(DATE_TIME_FORMAT) : null,
       userId: productEvaluate.userId,
       productId: productEvaluate.productId
     });
@@ -115,8 +113,7 @@ export class ProductEvaluateUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       point: this.editForm.get(['point'])!.value,
       evaluate: this.editForm.get(['evaluate'])!.value,
-      createdAt:
-        this.editForm.get(['createdAt'])!.value != null ? moment(this.editForm.get(['createdAt'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdAt: moment(),
       userId: this.editForm.get(['userId'])!.value,
       productId: this.editForm.get(['productId'])!.value
     };

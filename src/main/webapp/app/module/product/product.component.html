@@ -1,43 +1,110 @@
-<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
-  data-aos="fade">
-  <div class="container">
-    <div class="row align-items-center justify-content-center">
-      <div class="col-md-5 mx-auto mt-lg-5 text-center">
-        <h1>Smart Tivi LG 4K 55 inch 55UM7290PTD</h1>
-        <p class="mb-5"><strong class="text-white">14.300.000đ</strong></p>
+<div *ngIf="!isAdmin()">
+  <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
+    data-aos="fade">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-5 mx-auto mt-lg-5 text-center">
+          <h1>{{productType}}</h1>
+          <p class="mb-5"><strong class="text-white"></strong></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container" style="font-family: Arial, Helvetica, sans-serif;">
-  <nav style="margin-top: 20px;">
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link" id="nav-home-Laptop" data-toggle="tab" href="#nav-Laptop" role="tab"
-        aria-controls="nav-home" aria-selected="true">Laptop</a>
-      <a class="nav-item nav-link" id="nav-profile-Tivi" data-toggle="tab" href="#nav-Tivi" role="tab"
-        aria-controls="nav-profile" aria-selected="false">Tivi</a>
-      <a class="nav-item nav-link" id="nav-contact-tulanh" data-toggle="tab" href="#nav-tulanh" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Tủ lạnh</a>
-      <a class="nav-item nav-link" id="nav-contact-dieuhoa" data-toggle="tab" href="#nav-dieuhoa" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Điều hòa</a>
-      <a class="nav-item nav-link" id="nav-contact-locnuoc" data-toggle="tab" href="#nav-locnuoc" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Máy lọc nước</a>
-      <a class="nav-item nav-link" id="nav-contact-maygiat" data-toggle="tab" href="#nav-maygiat" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Máy giặt</a>
-      <a class="nav-item nav-link" id="nav-contact-nuocnong" data-toggle="tab" href="#nav-nuocnong" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Máy nước nóng</a>
-      <a class="nav-item nav-link" id="nav-contact-hutbui" data-toggle="tab" href="#nav-hutbui" role="tab"
-        aria-controls="nav-contact" aria-selected="false">Máy hút bụi</a>
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+      <!-- <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+          <fa-icon [icon]='faBars'></fa-icon>
+        </button>
+      </div> -->
+      <div class="p-4 pt-5">
+        <h3>Bộ lọc</h3>
+        <ul class="list-unstyled components mb-5">
+          <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Theo hãng</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu" *ngFor="let provider of providers; let i=index">
+              <li (click)="addPramsProvider(i)">
+                <a href="javascript:void(0);">{{provider.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Theo khoảng
+              giá</a>
+            <form role="form" [formGroup]="formPrice" (ngSubmit)="submitFilterPrice()">
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                <li>
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="exampleCheck1" placeholder="Từ"
+                      formControlName="from">
+                  </div>
+                </li>
+                <li>
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="exampleCheck1" placeholder="Đến" formControlName="to">
+                  </div>
+                </li>
+                <li>
+                  <button type="submit" [disabled]="formPrice.invalid" class="btn btn-danger btn-lg btn-block">Áp
+                    dụng</button>
+                </li>
+              </ul>
+            </form>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+      <div *ngIf="products.length">
+        <div class="site-section" id="properties-section">
+          <div class="container">
+            <div class="row large-gutters">
+              <ng-container *ngFor="let product of products; let i=index">
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
+                  <div class="ftco-media-1">
+                    <div class="ftco-media-1-inner">
+                      <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                          src="{{'data:image/png;base64,' + product.image}}" alt="FImageo" class="img-fluid"></a>
+                      <div class="ftco-media-details">
+                        <h3>{{product.name}}</h3>
+                        <p>{{product.code}}</p>
+                        <div style="margin-top: 10px;">
+                          <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                            </p>
+                            <p class="text-danger d-inline">
+                              -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                            </p>
+                            <p><del>{{product.sellPrice | number}}đ</del></p>
+                          </ng-container>
+                          <ng-template #productSale>
+                            <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div *ngIf="!products.length" class="container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="row">
+          <div class="col text-center">
+            <h2 class="section-title mb-3 text-danger">Không có sản phẩm nào</h2>
+          </div>
+        </div>
+      </div> -->
     </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade" id="nav-Laptop" role="tabpanel" aria-labelledby="nav-home-Laptop">Laptop</div>
-    <div class="tab-pane fade" id="nav-Tivi" role="tabpanel" aria-labelledby="nav-profile-Tivi">.Tivi..</div>
-    <div class="tab-pane fade" id="nav-tulanh" role="tabpanel" aria-labelledby="nav-contact-tulanh">.tulanh..</div>
-    <div class="tab-pane fade" id="nav-dieuhoa" role="tabpanel" aria-labelledby="nav-home-dieuhoa">.dieuhoa..</div>
-    <div class="tab-pane fade" id="nav-locnuoc" role="tabpanel" aria-labelledby="nav-profile-locnuoc">..locnuoc.</div>
-    <div class="tab-pane fade" id="nav-maygiat" role="tabpanel" aria-labelledby="nav-contact-maygiat">maygiat..</div>
-    <div class="tab-pane fade" id="nav-nuocnong" role="tabpanel" aria-labelledby="nav-home-nuocnong">nuocnong...</div>
-    <div class="tab-pane fade" id="nav-hutbui" role="tabpanel" aria-labelledby="nav-profile-hutbui">..hutbui.</div>
   </div>
 </div>

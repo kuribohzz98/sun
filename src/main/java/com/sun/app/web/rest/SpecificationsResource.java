@@ -53,7 +53,7 @@ public class SpecificationsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/specifications")
-    public ResponseEntity<SpecificationsDTO> createSpecifications(@Valid @RequestBody SpecificationsDTO specificationsDTO) throws URISyntaxException {
+    public ResponseEntity<SpecificationsDTO> createSpecifications(@RequestBody SpecificationsDTO specificationsDTO) throws URISyntaxException {
         log.debug("REST request to save Specifications : {}", specificationsDTO);
         if (specificationsDTO.getId() != null) {
             throw new BadRequestAlertException("A new specifications cannot already have an ID", ENTITY_NAME, "idexists");

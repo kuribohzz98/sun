@@ -42,7 +42,7 @@ export const specificationsRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       defaultSort: 'id,asc',
       pageTitle: 'Specifications'
     },
@@ -55,7 +55,7 @@ export const specificationsRoute: Routes = [
       specifications: SpecificationsResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Specifications'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +67,7 @@ export const specificationsRoute: Routes = [
       specifications: SpecificationsResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Specifications'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +79,7 @@ export const specificationsRoute: Routes = [
       specifications: SpecificationsResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Specifications'
     },
     canActivate: [UserRouteAccessService]

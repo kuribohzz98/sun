@@ -28,7 +28,7 @@
             <th scope="col"  jhiSortBy="quantity"><span>Quantity</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="productLine"><span>Product Line</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="image"><span>Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="point"><span>Point</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="salePrice"><span>Sale Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="updatedAt"><span>Updated At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="productTypeId"><span>Product Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -48,7 +48,7 @@
                 <td>{{product.quantity}}</td>
                 <td>{{product.productLine}}</td>
                 <td><img style="width: 130px; height: 100px;" src="{{'data:image/png;base64,' + product.image}}"></td>
-                <td>{{product.point}}</td>
+                <td>{{product.salePrice}}</td>
                 <td>{{product.createdAt | date:'medium'}}</td>
                 <td>{{product.updatedAt | date:'medium'}}</td>
                 <td>

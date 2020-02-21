@@ -45,7 +45,7 @@ public class CacheConfiguration {
             createCache(cm, com.sun.app.domain.UserDeliveryInfo.class.getName());
             createCache(cm, com.sun.app.domain.Provider.class.getName());
             createCache(cm, com.sun.app.domain.ProductType.class.getName());
-            createCache(cm, com.sun.app.domain.Product.class.getName());
+            // createCache(cm, com.sun.app.domain.Product.class.getName());
             createCache(cm, com.sun.app.domain.Specifications.class.getName());
             createCache(cm, com.sun.app.domain.ProductHistory.class.getName());
             createCache(cm, com.sun.app.domain.Payment.class.getName());
