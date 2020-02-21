@@ -1,35 +1,69 @@
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
+
 <head>
     <base href="/" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>sun</title>
-    <meta name="description" content="Description for sun">
+    <title>Đức Thọ</title>
+    <meta name="description" content="Description for Đức Thọ">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="style-src 'self' data: https://fonts.googleapis.com"> -->
+    <link rel="stylesheet" href="content/css/owl.theme.default.min.css">
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
     <link rel="stylesheet" href="content/css/loading.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900%7COswald:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="content/fonts/icomoon/style.css">
+    <!-- <link rel="stylesheet" href="content/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="content/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="content/css/jquery-ui.css">
+    <link rel="stylesheet" href="content/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="content/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="content/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="content/css/aos.css">
+    <link rel="stylesheet" href="content/css/style.css">
+    <link rel="stylesheet" href="content/css/spinner.css">
     <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
 </head>
-<body>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <jhi-main>
-        <div class="app-loading">
-            <div class="lds-css ng-scope">
-                <div class="lds-pacman">
-                    <div><div></div><div></div><div></div></div>
-                    <div><div></div><div></div><div></div></div>
+    <div class="site-wrap">
+
+        <jhi-main>
+            <div class="app-loading">
+                <!-- <div class="sk-chase">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div> -->
+                <div class="lds-css ng-scope">
+                    <div class="lds-pacman">
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-        </div>
-        <div class="app-loading">
-            <div id="jhipster-error" style="display:none">
-                <!-- This content is for troubleshooting purpose and will be removed when app renders -->
-                <h1>An error has occurred :-(</h1>
+            <div class="app-loading">
+                <div id="jhipster-error" style="display:none">
+                    <!-- This content is for troubleshooting purpose and will be removed when app renders -->
+                    <!-- <h1>An error has occurred :-(</h1>
                 <h2>Usual error causes</h2>
                 <ol>
                     <li>You started the application from an IDE and you didn't run <code style="color:red">npm start</code> or <code style="color:red">npm run webpack:build</code>.</li>
@@ -63,17 +97,19 @@
                 <h3>If you want to chat with contributors and other users</h3>
                 <p>
                     Join our chat room on <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">Gitter.im</a>. Please note that this is a public chat room, and that we expect you to respect other people and write in a correct English language!
-                </p>
-                <!-- end of troubleshooting content -->
+                </p> -->
+                </div>
+                <!-- <a href="#top" class="gototop"><span class="icon-angle-double-up"></span></a>  -->
             </div>
-        </div>
-    </jhi-main>
+        </jhi-main>
+    </div>
+
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
     <script type="text/javascript" language="javascript">
         // show an error message if the app loading takes more than 5 sec
-        window.onload=function() {
+        window.onload = function () {
             setTimeout(showError, 4000);
         }
         function showError() {
@@ -83,6 +119,19 @@
             }
         }
     </script>
+    <script src="content/js/jquery-3.3.1.min.js"></script>
+    <script src="content/js/jquery-ui.js"></script>
+    <script src="content/js/popper.min.js"></script>
+    <script src="content/js/bootstrap.min.js"></script>
+    <script src="content/js/jquery.countdown.min.js"></script>
+    <script src="content/js/bootstrap-datepicker.min.js"></script>
+    <script src="content/js/jquery.easing.1.3.js"></script>
+    <script src="content/js/aos.js"></script>
+    <script src="content/js/jquery.fancybox.min.js"></script>
+    <script src="content/js/jquery.sticky.js"></script>
+    <script src="content/js/main.js"></script>
+    <script src="content/js/owl.carousel.min.js"></script>
+
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {
@@ -105,4 +154,5 @@
         ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>-->
 </body>
+
 </html>

@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.*;
 import java.io.File;
@@ -137,5 +139,12 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         }
         return new CorsFilter(source);
     }
+
+    // @Bean
+    // public MultipartResolver multipartResolver() {
+    //     CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    //     multipartResolver.setMaxUploadSize(10242880);
+    //     return multipartResolver;
+    // }
 
 }

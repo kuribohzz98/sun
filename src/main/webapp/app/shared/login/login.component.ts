@@ -1,9 +1,9 @@
-import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { NotifierService } from 'angular-notifier';
+import { Component, AfterViewInit, Renderer, ElementRef, ViewChild, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-
 import { LoginService } from 'app/core/login/login.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -25,8 +25,9 @@ export class LoginModalComponent implements AfterViewInit {
     private loginService: LoginService,
     private renderer: Renderer,
     private router: Router,
-    public activeModal: NgbActiveModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notifierService: NotifierService,
+    private modalService: NgbModal
   ) {}
 
   ngAfterViewInit(): void {
@@ -41,10 +42,10 @@ export class LoginModalComponent implements AfterViewInit {
       username: '',
       password: ''
     });
-    this.activeModal.dismiss('cancel');
   }
 
   login(): void {
+    console.log(this.loginForm);
     this.loginService
       .login({
         username: this.loginForm.get('username')!.value,
@@ -54,26 +55,36 @@ export class LoginModalComponent implements AfterViewInit {
       .subscribe(
         () => {
           this.authenticationError = false;
-          this.activeModal.close();
-          if (
-            this.router.url === '/account/register' ||
-            this.router.url.startsWith('/account/activate') ||
-            this.router.url.startsWith('/account/reset/')
-          ) {
-            this.router.navigate(['']);
-          }
+          // if (
+          //   this.router.url === '/account/register' ||
+          //   this.router.url.startsWith('/account/activate') ||
+          //   this.router.url.startsWith('/account/reset/')
+          // ) {
+          //   this.router.navigate(['']);
+          // }
+          this.notifierService.show({
+            type: 'success',
+            message: 'Đăng nhập thành công',
+            id: 'login_success'
+          });
+          this.modalService.dismissAll();
         },
-        () => (this.authenticationError = true)
+        () => {
+          this.notifierService.show({
+            type: 'error',
+            message: 'Tên đăng nhập hoặc mật khẩu không chính xác',
+            id: 'login_faild'
+          });
+          return (this.authenticationError = true);
+        }
       );
   }
 
-  register(): void {
-    this.activeModal.dismiss('to state register');
-    this.router.navigate(['/account/register']);
-  }
+  // register(): void {
+  //   this.router.navigate(['/account/register']);
+  // }
 
   requestResetPassword(): void {
-    this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
   }
 }

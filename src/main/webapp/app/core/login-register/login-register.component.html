@@ -1,0 +1,46 @@
+<!-- <div class="modal fade" [id]="idModel" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        
+    </div>
+</div> -->
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 *ngIf="isLogin" class="modal-title" id="modalLabel">Đăng nhập</h5>
+        <h5 *ngIf="!isLogin" class="modal-title" id="modalLabel">Đăng ký</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismissAll()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul role="tablist" class="nav nav-tabs justify-content-start row">
+            <li class="nav-item col-md-6">
+                <div class="nav-link" [ngClass]="isLogin ? 'active': ''" (click)="changTabSet()">
+                    <p class="text-center">Đăng nhập</p>
+                </div>
+            </li>
+            <li class="nav-item col-md-6" (click)="changTabSet()">
+                <div class="nav-link" [ngClass]="!isLogin ? 'active': ''">
+                    <p class="text-center">Đăng ký</p>
+                </div>
+            </li>
+        </ul>
+        <div *ngIf="isLogin" class="tab-content">
+            <div role="tabpanel" class="tab-pane active" aria-labelledby="tab-selectbyid2"
+                id="tab-selectbyid2-panel">
+                <jhi-login-modal></jhi-login-modal>
+            </div>
+        </div>
+        <div *ngIf="!isLogin" class="tab-content">
+            <div role="tabpanel" class="tab-pane active" aria-labelledby="tab-selectbyid2"
+                id="tab-selectbyid2-panel">
+                <jhi-register></jhi-register>
+            </div>
+
+        </div>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+    </div> -->
+</div>

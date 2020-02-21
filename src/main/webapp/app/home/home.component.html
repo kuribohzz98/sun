@@ -1,41 +1,274 @@
-<div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
-
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account"
-                   > You are logged in as user "{{account.login}}". </span>
-            </div>
-
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span>You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register">Register a new account</a>
+<div *ngIf="!isAdmin()">
+    <div class="site-block-wrap">
+        <div class="owl-carousel with-dots">
+            <div class="site-blocks-cover overlay overlay-2"
+                style="background-image: url(content/images/silver-and-black-laptop.jpg);" data-aos="fade"
+                id="home-section">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-6 mt-lg-5 text-center">
+                            <h1 class="text-shadow">Đức Thọ Electronic</h1>
+                            <p class="mb-5 text-shadow">Đại lý bán lẻ đồ điện tử lớn nhất cả nước</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <p>
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-        </p>
+    </div>
+    
+    <div class="site-section" id="properties-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-7 text-left">
+                    <h2 class="section-title mb-3">Sản Phẩm Đang khuyến mại</h2>
+                </div>
+            </div>
+            <div class="row large-gutters">
+                <ng-container *ngFor="let product of productsSale; let i=index">
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
+                        <div class="ftco-media-1">
+                            <div class="ftco-media-1-inner">
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                        class="img-fluid"></a>
+                                <div class="ftco-media-details">
+                                    <h3>{{product.name}}</h3>
+                                    <p>{{product.code}}</p>
+                                    <div style="margin-top: 10px;">
+                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            <p class="text-danger d-inline">
+                                                -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                                            </p>
+                                            <p><del>{{product.sellPrice | number}}đ</del></p>
+                                        </ng-container>
+                                        <ng-template #productSale>
+                                            <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    
+    <section class="py-5 color-primary site-section how-it-works" id="san-pham">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-3" style="color: #fff;">Danh mục sản phẩm</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="pr-5 first-step">
+                        <span>01.</span>
+                        <span class="custom-icon flaticon-house text-black"></span>
+                        <h3>Find Property.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+    
+                <div class="col-md-4 text-center">
+                    <div class="pr-5 second-step">
+                        <span>02.</span>
+                        <span class="custom-icon flaticon-coin text-black"></span>
+                        <h3>Buy Property.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+    
+                <div class="col-md-4 text-center">
+                    <div class="pr-5">
+                        <span>03.</span>
+                        <span class="custom-icon flaticon-home text-black"></span>
+                        <h3>Outstanding Houses.</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    <div class="site-section" id="properties-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-7 text-left">
+                    <h2 class="section-title mb-3">LapTop</h2>
+                </div>
+            </div>
+            <div class="row large-gutters">
+                <ng-container *ngFor="let product of productsLaptop; let i=index">
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
+                        <div class="ftco-media-1">
+                            <div class="ftco-media-1-inner">
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                        class="img-fluid"></a>
+                                <div class="ftco-media-details">
+                                    <h3>{{product.name}}</h3>
+                                    <p>{{product.code}}</p>
+                                    <div style="margin-top: 10px;">
+                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            <p class="text-danger d-inline">
+                                                -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                                            </p>
+                                            <p><del>{{product.sellPrice | number}}đ</del></p>
+                                        </ng-container>
+                                        <ng-template #productSale>
+                                            <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <p><a [routerLink]="['/san-pham/'+ productTypeLaptop.code]" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <section class="site-section bg-light" id="services-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Services</h2>
+                </div>
+            </div>
+            <div class="row align-items-stretch">
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-house"></span></div>
+                        <div>
+                            <h3>Find Property</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-coin"></span></div>
+                        <div>
+                            <h3>Buy Property</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-home"></span></div>
+                        <div>
+                            <h3>Beautiful Home</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+    
+    
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-flat"></span></div>
+                        <div>
+                            <h3>Buildings &amp; Lands</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-location"></span></div>
+                        <div>
+                            <h3>Property Locator</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="unit-4 d-flex">
+                        <div class="unit-4-icon mr-4"><span class="text-primary flaticon-mobile-phone"></span></div>
+                        <div>
+                            <h3>Mobile Apps</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae
+                                eligendi
+                                at.</p>
+                            <p><a href="#">Learn More</a></p>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    <div class="site-section" id="properties-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-7 text-left">
+                    <h2 class="section-title mb-3">Tivi</h2>
+                </div>
+            </div>
+            <div class="row large-gutters">
+                <ng-container *ngFor="let product of productsTivi; let i=index">
+                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
+                        <div class="ftco-media-1">
+                            <div class="ftco-media-1-inner">
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
+                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                        class="img-fluid"></a>
+                                <div class="ftco-media-details">
+                                    <h3>{{product.name}}</h3>
+                                    <p>{{product.code}}</p>
+                                    <div style="margin-top: 10px;">
+                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            <p class="text-danger d-inline">
+                                                -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
+                                            </p>
+                                            <p><del>{{product.sellPrice | number}}đ</del></p>
+                                        </ng-container>
+                                        <ng-template #productSale>
+                                            <p class="font-weight-bold">{{product.sellPrice | number}}đ</p>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <p><a [routerLink]="['/san-pham/' + productTypeTivi.code]" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,3 +1,54 @@
-<div class="footer">
-    <p>This is your footer</p>
-</div>
+<footer class="site-footer" *ngIf="!isAdmin()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-5">
+            <h2 class="footer-heading mb-4">THÔNG TIN CÔNG TY</h2>
+            <p>Giám đốc kinh doanh: Nguyễn Đức Thọ</p>
+            <P>Địa chỉ: Đại học Công Nghiệp Hà Nội, số 298 Đường Cầu Diễn, quận Bắc Từ Liêm, Thành phố Hà Nội, Việt Nam</P>
+            <P>SĐT: 0349.95.94.94</P>
+            <P>Email: lucasthohihi@gmail.com</P>
+          </div>
+          <div class="col-md-3 mx-auto">
+            <h2 class="footer-heading mb-4">Tổng đài hỗ trợ</h2>
+            <ul class="list-unstyled">
+              <li><p>Mua hàng:&nbsp;&nbsp;&nbsp;1900.1001</p></li>
+              <li><p>Kỹ thuật:&nbsp;&nbsp;&nbsp;1900.1002</p></li>
+              <li><p>Bảo trì:&nbsp;&nbsp;&nbsp;1900.1003</p></li>
+              <li><p>Khiếu nại:&nbsp;&nbsp;&nbsp;1900.1004</p></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-4">
+          <h2 class="footer-heading mb-4">Chính sách</h2>
+          <p>Chính sách mua hàng từ xa</p>
+          <p>Chính sách đặt cọc giữ máy</p>
+          <p>Chính sách đặt hàng</p>
+          <p>Chính sách giao nhận - đổi trả</p>
+          <p>Chính sách bảo hành</p>
+          <p>Chính sách bảo mật thông tin</p>
+          <p>Thỏa thuận sử dụng và quy định giao dịch chung</p>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-5 mt-5 text-center">
+      <div class="col-md-12">
+        <div class="border-top pt-5">
+          <p class="copyright font-family-2">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            2020 &copy; Công ty Cổ phần TNHH Đức Thọ Electronic
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. <i class="icon-heart text-danger" aria-hidden="true"></i> -->
+          </p>
+          <p class="font-family-2" style="font-size: small;">
+            GPDKKD: 0303217354 do sở KH & ĐT TP.HN cấp ngày 02/01/2007. GP số 57/GP-TTĐT do Sở TTTT TP HN cấp ngày 30/07/2018
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

@@ -1,3 +1,4 @@
+import { NotifierService } from 'angular-notifier';
 import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -14,6 +15,9 @@ export class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
 
+  @ViewChild('firstName', { static: false })
+  firstName?: ElementRef;
+
   doNotMatch = false;
   error = false;
   errorEmailExists = false;
@@ -21,6 +25,8 @@ export class RegisterComponent implements AfterViewInit {
   success = false;
 
   registerForm = this.fb.group({
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
     login: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[_.@A-Za-z0-9-]*$')]],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
@@ -31,12 +37,13 @@ export class RegisterComponent implements AfterViewInit {
     private loginModalService: LoginModalService,
     private registerService: RegisterService,
     private renderer: Renderer,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notiferService: NotifierService
   ) {}
 
   ngAfterViewInit(): void {
-    if (this.login) {
-      this.renderer.invokeElementMethod(this.login.nativeElement, 'focus', []);
+    if (this.firstName) {
+      this.renderer.invokeElementMethod(this.firstName.nativeElement, 'focus', []);
     }
   }
 
@@ -53,7 +60,14 @@ export class RegisterComponent implements AfterViewInit {
       const login = this.registerForm.get(['login'])!.value;
       const email = this.registerForm.get(['email'])!.value;
       this.registerService.save({ login, email, password, langKey: 'en' }).subscribe(
-        () => (this.success = true),
+        () => {
+          this.notiferService.show({
+            type: 'success',
+            message: 'Tạo tài khoản thành công',
+            id: 'register-success'
+          });
+          this.success = true;
+        },
         response => this.processError(response)
       );
     }

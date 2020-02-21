@@ -63,7 +63,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
                 {
                     loader: 'cache-loader',
                     options: {
-                      cacheDirectory: path.resolve('target/cache-loader')
+                        cacheDirectory: path.resolve('target/cache-loader')
                     }
                 },
                 {
@@ -107,7 +107,7 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
             ? null
             : new SimpleProgressWebpackPlugin({
                 format: options.stats === 'minimal' ? 'compact' : 'expanded'
-              }),
+            }),
         new FriendlyErrorsWebpackPlugin(),
         new ForkTsCheckerWebpackPlugin(),
         new BrowserSyncPlugin({
@@ -139,7 +139,12 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
         new WebpackNotifierPlugin({
             title: 'JHipster',
             contentImage: path.join(__dirname, 'logo-jhipster.png')
-        })
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery'
+        }),
     ].filter(Boolean),
     mode: 'development'
 });

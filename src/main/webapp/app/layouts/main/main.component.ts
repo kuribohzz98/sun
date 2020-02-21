@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '@angular/router';
 
@@ -9,6 +9,8 @@ import { AccountService } from 'app/core/auth/account.service';
   templateUrl: './main.component.html'
 })
 export class MainComponent implements OnInit {
+  public isShow: boolean | undefined;
+  public topPosToStartShowing: number = 100;
   constructor(private accountService: AccountService, private titleService: Title, private router: Router) {}
 
   ngOnInit(): void {
@@ -36,8 +38,26 @@ export class MainComponent implements OnInit {
   private updateTitle(): void {
     let pageTitle = this.getPageTitle(this.router.routerState.snapshot.root);
     if (!pageTitle) {
-      pageTitle = 'Sun';
+      pageTitle = 'Đức Thọ';
     }
     this.titleService.setTitle(pageTitle);
+  }
+
+  gotoTop(): void {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  @HostListener('window:scroll')
+  checkScroll(): void {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
   }
 }
