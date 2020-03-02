@@ -21,7 +21,7 @@ function accountWithAuthorities(authorities: string[]): Account {
     lastName: '',
     login: '',
     imageUrl: ''
-  };
+  } as Account;
 }
 
 describe('Service Tests', () => {

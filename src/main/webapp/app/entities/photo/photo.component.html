@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span>Photos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-photo" [routerLink]="['/photo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Photo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="photos?.length === 0">
+        <span>No photos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="photos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Name</span></th>
+            <th scope="col" ><span>Image</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let photo of photos ;trackBy: trackId">
+                <td><a [routerLink]="['/photo', photo.id, 'view' ]">{{photo.id}}</a></td>
+                <td>{{photo.name}}</td>
+                <td>
+                    <a *ngIf="photo.image" (click)="openFile(photo.imageContentType, photo.image)">
+                        <img [src]="'data:' + photo.imageContentType + ';base64,' + photo.image" style="max-height: 30px;" alt="photo image"/>
+                    </a>
+                    <span *ngIf="photo.image">{{photo.imageContentType}}, {{byteSize(photo.image)}}</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/photo', photo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/photo', photo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(photo)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

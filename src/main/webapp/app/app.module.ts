@@ -16,6 +16,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { ModuleComponentModule } from './module/module-component.module';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
 import { NotifierModule } from 'angular-notifier';
+import { LazyLoadImageModule, intersectionObserverPreset } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { NotifierModule } from 'angular-notifier';
     SunEntityModule,
     SunAppRoutingModule,
     AccountModule,
-    NotifierModule
+    NotifierModule,
+    LazyLoadImageModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, LoginRegisterComponent],
   bootstrap: [MainComponent]

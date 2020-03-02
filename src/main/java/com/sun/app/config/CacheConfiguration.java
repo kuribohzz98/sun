@@ -51,6 +51,7 @@ public class CacheConfiguration {
             createCache(cm, com.sun.app.domain.Payment.class.getName());
             createCache(cm, com.sun.app.domain.Payment.class.getName() + ".products");
             createCache(cm, com.sun.app.domain.ProductEvaluate.class.getName());
+            createCache(cm, com.sun.app.domain.Photo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,3 +1,4 @@
+import { FileUploadService } from './../../service/fileUpload.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,18 +20,21 @@ export class ProductComponent implements OnInit, OnDestroy {
   products?: IProduct[];
   eventSubscriber?: Subscription;
   totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
+  itemsPerPage = 10;
   page!: number;
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  defaultImg: string = 'content/assest/Eclipse.gif';
+  image: String = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 
   constructor(
     protected productService: ProductService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected fileUploadService: FileUploadService
   ) {}
 
   loadPage(page?: number): void {
@@ -97,6 +101,13 @@ export class ProductComponent implements OnInit, OnDestroy {
       }
     });
     this.products = data ? data : [];
+    // const paths = (this.products || []).map(product => product.image || '');
+    // if (!paths) return;
+    // this.fileUploadService.getImages(paths).subscribe(res => {
+    //   (this.products || []).forEach(product => {
+    //     if (product.image) product.imageData = res[product.image];
+    //   })
+    // })
   }
 
   protected onError(): void {

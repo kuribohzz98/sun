@@ -5,7 +5,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
@@ -84,7 +84,7 @@ export class ProductUpdateComponent implements OnInit {
         });
 
       this.providerService
-        .query({ filter: 'product-is-null' })
+        .query({ filter: 'product-is-null', page: 0, size: 100 })
         .pipe(
           map((res: HttpResponse<IProvider[]>) => {
             return res.body ? res.body : [];
@@ -120,7 +120,7 @@ export class ProductUpdateComponent implements OnInit {
       importPrice: product.importPrice,
       quantity: product.quantity,
       productLine: product.productLine,
-      image: product.image,
+      // image: product.image,
       salePrice: product.salePrice
     });
   }
@@ -133,23 +133,29 @@ export class ProductUpdateComponent implements OnInit {
     this.isSaving = true;
     const typeFile = this.fileToUpload ? this.fileToUpload.name.split('.') : null;
     const nameFile = typeFile ? uuid() + '.' + typeFile[typeFile.length - 1] : '';
-    const product = this.createFromForm(nameFile);
+    const product = this.createFromForm();
     if (this.fileToUpload) {
-      this.fileUploadService.uploadOneFile(this.fileToUpload, nameFile).subscribe(console.log);
-    }
-    if (product.id !== undefined) {
-      this.subscribeToSaveResponse(this.productService.update(product));
+      this.fileUploadService.uploadOneFile(this.fileToUpload, nameFile).subscribe(photo => {
+        product.photoId = photo.id;
+        if (product.id !== undefined) {
+          return this.subscribeToSaveResponse(this.productService.update(product));
+        }
+        return this.subscribeToSaveResponse(this.productService.create(product));
+      });
     } else {
-      this.subscribeToSaveResponse(this.productService.create(product));
+      if (product.id !== undefined) {
+        this.subscribeToSaveResponse(this.productService.update(product));
+      } else {
+        this.subscribeToSaveResponse(this.productService.create(product));
+      }
     }
   }
 
   handleFileInput(files: FileList): void {
     this.fileToUpload = files.item(0);
-    console.log(files.item(0));
   }
 
-  private createFromForm(nameFile: string): IProduct {
+  private createFromForm(): IProduct {
     return {
       ...new Product(),
       id: this.editForm.get(['id'])!.value,
@@ -161,7 +167,7 @@ export class ProductUpdateComponent implements OnInit {
       importPrice: this.editForm.get(['importPrice'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
       productLine: this.editForm.get(['productLine'])!.value,
-      image: nameFile,
+      // image: this.fileToUpload,
       salePrice: this.editForm.get(['salePrice'])!.value,
       createdAt: moment(),
       updatedAt: moment()

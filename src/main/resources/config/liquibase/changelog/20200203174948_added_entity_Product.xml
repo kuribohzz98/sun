@@ -22,6 +22,9 @@
             <column name="provider_id" type="int(11)">
                 <constraints nullable="false" />
             </column>
+            <column name="photo_id" type="int(11)">
+                <constraints nullable="true" />
+            </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
@@ -38,9 +41,6 @@
                 <constraints nullable="false" />
             </column>
             <column name="product_line" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="image" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="sale_price" type="int(11)" defaultValueNumeric="0">
@@ -77,13 +77,13 @@
             <column name="id" type="numeric"/>
             <column name="product_type_id" type="numeric"/>
             <column name="provider_id" type="numeric"/>
+            <column name="photo_id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="code" type="string"/>
             <column name="sell_price" type="numeric"/>
             <column name="import_price" type="numeric"/>
             <column name="quantity" type="numeric"/>
             <column name="product_line" type="string"/>
-            <column name="image" type="string"/>
             <column name="sale_price" type="numeric"/>
             <column name="created_at" type="datetime"/>
             <column name="updated_at" type="datetime"/>

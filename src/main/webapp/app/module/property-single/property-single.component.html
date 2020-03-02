@@ -54,7 +54,7 @@
                 </button>
                 <p class="align-self-center" style="display: inline; margin-left: 1rem; margin-right: 1rem;">{{amount}}
                 </p>
-                <button class="btn btn-secondary" style="display: inline;" (click)="addAmount(amount + 1)">
+                <button [disabled]="amount >= product.quantity" class="btn btn-secondary" style="display: inline;" (click)="addAmount(amount + 1)">
                   <fa-icon [icon]="faPlus"></fa-icon>
                 </button>
               </div>

@@ -64,8 +64,8 @@ public class ProductResourceIT {
     private static final String DEFAULT_PRODUCT_LINE = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCT_LINE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_IMAGE = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGE = "BBBBBBBBBB";
+    private static final Integer DEFAULT_PHOTO_ID = 1;
+    private static final Integer UPDATED_PHOTO_ID = 2;
 
     private static final Integer DEFAULT_POINT = 1;
     private static final Integer UPDATED_POINT = 2;
@@ -126,13 +126,13 @@ public class ProductResourceIT {
         Product product = new Product()
             .productTypeId(DEFAULT_PRODUCT_TYPE_ID)
             .providerId(DEFAULT_PROVIDER_ID)
+            .photoId(DEFAULT_PHOTO_ID)
             .name(DEFAULT_NAME)
             .code(DEFAULT_CODE)
             .sellPrice(DEFAULT_SELL_PRICE)
             .importPrice(DEFAULT_IMPORT_PRICE)
             .quantity(DEFAULT_QUANTITY)
             .productLine(DEFAULT_PRODUCT_LINE)
-            .image(DEFAULT_IMAGE)
             .salePrice(DEFAULT_POINT)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT);
@@ -168,13 +168,13 @@ public class ProductResourceIT {
         Product product = new Product()
             .productTypeId(UPDATED_PRODUCT_TYPE_ID)
             .providerId(UPDATED_PROVIDER_ID)
+            .photoId(UPDATED_PHOTO_ID)
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .sellPrice(UPDATED_SELL_PRICE)
             .importPrice(UPDATED_IMPORT_PRICE)
             .quantity(UPDATED_QUANTITY)
             .productLine(UPDATED_PRODUCT_LINE)
-            .image(UPDATED_IMAGE)
             .salePrice(UPDATED_POINT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
@@ -224,13 +224,13 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getProductTypeId()).isEqualTo(DEFAULT_PRODUCT_TYPE_ID);
         assertThat(testProduct.getProviderId()).isEqualTo(DEFAULT_PROVIDER_ID);
+        assertThat(testProduct.getPhotoId()).isEqualTo(DEFAULT_PHOTO_ID);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProduct.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testProduct.getSellPrice()).isEqualTo(DEFAULT_SELL_PRICE);
         assertThat(testProduct.getImportPrice()).isEqualTo(DEFAULT_IMPORT_PRICE);
         assertThat(testProduct.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testProduct.getProductLine()).isEqualTo(DEFAULT_PRODUCT_LINE);
-        assertThat(testProduct.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testProduct.getSalePrice()).isEqualTo(DEFAULT_POINT);
         assertThat(testProduct.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testProduct.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
@@ -422,13 +422,13 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].productTypeId").value(hasItem(DEFAULT_PRODUCT_TYPE_ID)))
             .andExpect(jsonPath("$.[*].providerId").value(hasItem(DEFAULT_PROVIDER_ID)))
+            .andExpect(jsonPath("$.[*].photoId").value(hasItem(DEFAULT_PHOTO_ID)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].sellPrice").value(hasItem(DEFAULT_SELL_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].importPrice").value(hasItem(DEFAULT_IMPORT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].productLine").value(hasItem(DEFAULT_PRODUCT_LINE)))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(DEFAULT_IMAGE)))
             .andExpect(jsonPath("$.[*].point").value(hasItem(DEFAULT_POINT)))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
@@ -447,13 +447,13 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.productTypeId").value(DEFAULT_PRODUCT_TYPE_ID))
             .andExpect(jsonPath("$.providerId").value(DEFAULT_PROVIDER_ID))
+            .andExpect(jsonPath("$.photoId").value(DEFAULT_PHOTO_ID))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.sellPrice").value(DEFAULT_SELL_PRICE.intValue()))
             .andExpect(jsonPath("$.importPrice").value(DEFAULT_IMPORT_PRICE.intValue()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.productLine").value(DEFAULT_PRODUCT_LINE))
-            .andExpect(jsonPath("$.image").value(DEFAULT_IMAGE))
             .andExpect(jsonPath("$.point").value(DEFAULT_POINT))
             .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
             .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()));
@@ -482,13 +482,13 @@ public class ProductResourceIT {
         updatedProduct
             .productTypeId(UPDATED_PRODUCT_TYPE_ID)
             .providerId(UPDATED_PROVIDER_ID)
+            .photoId(UPDATED_PHOTO_ID)
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .sellPrice(UPDATED_SELL_PRICE)
             .importPrice(UPDATED_IMPORT_PRICE)
             .quantity(UPDATED_QUANTITY)
             .productLine(UPDATED_PRODUCT_LINE)
-            .image(UPDATED_IMAGE)
             .salePrice(UPDATED_POINT)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT);
@@ -505,13 +505,13 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getProductTypeId()).isEqualTo(UPDATED_PRODUCT_TYPE_ID);
         assertThat(testProduct.getProviderId()).isEqualTo(UPDATED_PROVIDER_ID);
+        assertThat(testProduct.getPhotoId()).isEqualTo(UPDATED_PHOTO_ID);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProduct.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testProduct.getSellPrice()).isEqualTo(UPDATED_SELL_PRICE);
         assertThat(testProduct.getImportPrice()).isEqualTo(UPDATED_IMPORT_PRICE);
         assertThat(testProduct.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testProduct.getProductLine()).isEqualTo(UPDATED_PRODUCT_LINE);
-        assertThat(testProduct.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testProduct.getSalePrice()).isEqualTo(UPDATED_POINT);
         assertThat(testProduct.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testProduct.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);

@@ -32,6 +32,9 @@ public class Product implements Serializable {
     @Column(name = "provider_id", nullable = false)
     private Integer providerId;
 
+    @Column(name = "photo_id")
+    private Integer photoId;
+
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
@@ -53,9 +56,6 @@ public class Product implements Serializable {
 
     @Column(name = "product_line")
     private String productLine;
-
-    @Column(name = "image")
-    private String image;
 
     @Column(name = "sale_price")
     private Integer salePrice;
@@ -89,6 +89,10 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     private Set<Specifications> specifications = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "photo_id", insertable = false, updatable = false)
+    private Photo photo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -203,17 +207,17 @@ public class Product implements Serializable {
         this.productLine = productLine;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public Product image(String image) {
-        this.image = image;
+    public Product photoId(Integer photoId) {
+        this.photoId = photoId;
         return this;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public Integer getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Integer photoId) {
+        this.photoId = photoId;
     }
 
     public Integer getSalePrice() {
@@ -325,6 +329,14 @@ public class Product implements Serializable {
         this.specifications = specifications;
     }
 
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -349,13 +361,13 @@ public class Product implements Serializable {
             "id=" + getId() +
             ", productTypeId=" + getProductTypeId() +
             ", providerId=" + getProviderId() +
+            ", photoId=" + getPhotoId() +
             ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
             ", sellPrice=" + getSellPrice() +
             ", importPrice=" + getImportPrice() +
             ", quantity=" + getQuantity() +
             ", productLine='" + getProductLine() + "'" +
-            ", image='" + getImage() + "'" +
             ", salePrice=" + getSalePrice() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

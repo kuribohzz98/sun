@@ -5,6 +5,7 @@ export interface IProduct {
   id?: number;
   productTypeId?: number;
   providerId?: number;
+  photoId?: number;
   name?: string;
   code?: string;
   sellPrice?: number;
@@ -12,7 +13,6 @@ export interface IProduct {
   salePrice?: number;
   quantity?: number;
   productLine?: string;
-  image?: string;
   point?: number;
   createdAt?: Moment;
   updatedAt?: Moment;

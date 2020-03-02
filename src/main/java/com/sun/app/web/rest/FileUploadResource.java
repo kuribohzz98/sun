@@ -1,73 +1,65 @@
 package com.sun.app.web.rest;
 
-import com.sun.app.domain.FileUpload;
+import com.sun.app.service.FileService;
+import com.sun.app.service.dto.PhotoDTO;
+import io.github.jhipster.web.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class FileUploadResource {
     private final Logger log = LoggerFactory.getLogger(FileUploadResource.class);
 
+    private final FileService fileService;
+
+    private static final String ENTITY_NAME = "photo";
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    public FileUploadResource(FileService fileService) {
+        this.fileService = fileService;
+    }
+
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     @PostMapping("/upload/uploadOneFile")
-    public String uploadOneFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) {
-        return this.doUpload(files);
+    public ResponseEntity<PhotoDTO> uploadOneFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) throws IOException, URISyntaxException {
+        PhotoDTO photoDTO = this.fileService.upLoadImage(files);
+        return ResponseEntity.created(new URI("/api/image/" + photoDTO.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, photoDTO.getId().toString()))
+            .body(photoDTO);
     }
 
-    @PostMapping("upload/uploadMultiFile")
-    public String uploadMultiFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) {
-        return this.doUpload(files);
+    @PostMapping("/upload/uploadMultiFile")
+    public ResponseEntity<String> uploadMultiFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) {
+        return ResponseEntity.ok().body(this.fileService.doUpload(files));
     }
 
-    private String doUpload(List<MultipartFile> files) {
-        // Thư mục gốc upload file.
-
-        File uploadRootDir = new File("src/main/resources/assest/upload");
-        // Tạo thư mục gốc upload nếu nó không tồn tại.
-        if (!uploadRootDir.exists()) {
-            uploadRootDir.mkdirs();
-        }
-        //
-        List<File> uploadedFiles = new ArrayList<File>();
-        List<String> failedFiles = new ArrayList<String>();
-
-        for (MultipartFile fileData : files) {
-
-            // Tên file gốc tại Client.
-            String name = fileData.getOriginalFilename();
-            System.out.println("Client File Name = " + name);
-
-            if (name != null && name.length() > 0) {
-                try {
-                    // Tạo file tại Server.
-                    File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
-
-                    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-                    stream.write(fileData.getBytes());
-                    stream.close();
-                    //
-                    uploadedFiles.add(serverFile);
-                    System.out.println("Write file: " + serverFile);
-                } catch (Exception e) {
-                    System.out.println("Error Write file: " + name);
-                    failedFiles.add(name);
-                }
-            }
-        }
-        return "{'message': 'success'}";
+    @GetMapping("/getFile/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.fileService.getPhoto(id));
     }
+
+//    @GetMapping("/getFile/images")
+//    public Map<String, String> getImages(@RequestParam("paths") List<String> paths) {
+//        return this.fileService.getImages(paths);
+//    }
 }
