@@ -1,6 +1,8 @@
 package com.sun.app.web.rest;
 
+import com.sun.app.service.MomoService;
 import com.sun.app.service.PaymentService;
+import com.sun.app.service.dto.MomoQRResponse;
 import com.sun.app.web.rest.errors.BadRequestAlertException;
 import com.sun.app.service.dto.PaymentDTO;
 
@@ -13,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * REST controller for managing {@link com.sun.app.domain.Payment}.
@@ -41,8 +44,12 @@ public class PaymentResource {
 
     private final PaymentService paymentService;
 
-    public PaymentResource(PaymentService paymentService) {
+    private final MomoService momoService;
+
+
+    public PaymentResource(PaymentService paymentService, MomoService momoService) {
         this.paymentService = paymentService;
+        this.momoService = momoService;
     }
 
     /**
@@ -130,6 +137,33 @@ public class PaymentResource {
         log.debug("REST request to delete Payment : {}", id);
         paymentService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("payments/getByTransactionId/{transactionId}")
+    public ResponseEntity<PaymentDTO> getPaymentByTransactionId(@PathVariable String transactionId) {
+        log.debug("REST request to getPaymentByTransactionId Payment : {}", transactionId);
+        Optional<PaymentDTO> paymentDTO = paymentService.findOneByTransactionId(transactionId);
+        return ResponseUtil.wrapOrNotFound(paymentDTO);
+    }
+
+    @GetMapping("payments/getAllByUserId/{userId}")
+    public ResponseEntity<List<PaymentDTO>> getAllByUserId(@PathVariable Long userId) {
+        Optional<List<PaymentDTO>> paymentDTOS = paymentService.finAllByUserId(userId);
+        return ResponseEntity.ok().body(paymentDTOS.get());
+    }
+
+    @PostMapping("/payments/momo")
+    public ResponseEntity<String> momoWatchNotification(@RequestBody String momoQRRequest) {
+        System.out.println("____REST request post momoQRRequest_____________" + momoQRRequest);
+        MomoQRResponse momoQRResponse = this.momoService.validateQRNotifyRequest(momoQRRequest);
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(momoQRResponse.toString());
+    }
+
+    @GetMapping("/payments/momo/qrCode")
+    public ResponseEntity<byte[]> momoGetQrCode(@RequestParam("amount") Long amount) {
+        String uuid = UUID.randomUUID().toString();
+        byte[] data = this.momoService.createQrCode(amount, uuid);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(data);
     }
 
 }

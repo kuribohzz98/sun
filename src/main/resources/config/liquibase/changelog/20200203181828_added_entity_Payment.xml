@@ -22,13 +22,22 @@
             <column name="price" type="bigint">
                 <constraints nullable="false" />
             </column>
-            <column name="status" type="enum('PAID','DELIVERED')" defaultValue="PAID">
+            <column name="status" type="enum('UNPAID','PAID','DELIVERED')" defaultValue="UNPAID">
                 <constraints nullable="false" />
             </column>
             <column name="recipient_phone" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="delivery_address" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="transaction_id" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="qrcode" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="desciption" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             <column name="created_at" type="datetime" defaultValueComputed="CURRENT_TIMESTAMP">
@@ -44,6 +53,9 @@
     <changeSet id="20200203181828-1-relations" author="jhipster">
 
         <createTable tableName="payment_product">
+            <column name="id" type="int(11)">
+                <constraints nullable="false"/>
+            </column>
             <column name="product_id" type="int(11)">
                 <constraints nullable="false"/>
             </column>
@@ -52,7 +64,7 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="payment_id, product_id" tableName="payment_product"/>
+        <addPrimaryKey columnNames="id" tableName="payment_product"/>
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

@@ -7,7 +7,7 @@ import { ProductEvaluateService } from './../../service/product-evaluate.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, of, forkJoin, BehaviorSubject } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faShoppingCart, faPlus, faMinus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faPlus, faMinus, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { takeUntil, mergeMap, concatMap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { NotifierService } from 'angular-notifier';
@@ -32,6 +32,7 @@ export class PropertySingleComponent implements OnInit, OnDestroy {
   private faPlus = faPlus;
   private faMinus = faMinus;
   private faStar = faStar;
+  private faUser = faUserCircle;
   private ratting: number = 0;
   private destroy$: Subject<boolean> = new Subject();
   private product: IProduct = {};
@@ -69,9 +70,10 @@ export class PropertySingleComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log('__________', result);
         this.product = result[1];
+        if (!this.product.quantity) this.amount = 0;
         this.evaluates = result[0].body as IProductEvaluate[];
+        this.advancePointEvaluate = 0;
         this.evaluates.map(evaluate => {
-          this.advancePointEvaluate = 0;
           evaluate.createdAt = moment(evaluate.createdAt).format('LLLL');
           this.caculateProgressRating(evaluate);
         });
@@ -97,7 +99,7 @@ export class PropertySingleComponent implements OnInit, OnDestroy {
   }
 
   caculateProgressRating(evaluate: any): void {
-    this.advancePointEvaluate += +(+evaluate.point / ((this.product.productEvaluates || []).length || 1)).toFixed(1);
+    this.advancePointEvaluate += +(+evaluate.point / ((this.evaluates || []).length || 1)).toFixed(1);
     if (this.progressRating[+evaluate.point - 1]) {
       this.progressRating[+evaluate.point - 1] += +evaluate.point;
       return;
@@ -123,12 +125,12 @@ export class PropertySingleComponent implements OnInit, OnDestroy {
       return;
     }
     let cart = JSON.parse(localStorage.getItem('cart') || '[]') as any[];
-    let cartTemp: any = [];
+    let cartTemp: IProduct[] = [];
     cart.push({
       id: this.product.id,
       name: this.product.name,
       code: this.product.code,
-      image: this.product.image,
+      photoId: this.product.photoId,
       sellPrice: this.product.sellPrice,
       salePrice: this.product.salePrice,
       quantity: this.amount,

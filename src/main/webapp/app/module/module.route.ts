@@ -1,3 +1,5 @@
+import { UserRouteAccessService } from './../core/auth/user-route-access-service';
+import { StatisticalComponent } from './statistical/statistical.component';
 import { ProductTypeResolve } from './product/product.route';
 import { ProductResolve } from './property-single/property-single.route';
 import { Route } from '@angular/router';
@@ -23,5 +25,17 @@ export const routes: Route[] = [
     resolve: {
       product: ProductResolve
     }
+  },
+  {
+    path: 'hoa-don',
+    loadChildren: () => import('./bill/bill.module').then(m => m.BillModule)
+  },
+  {
+    path: 'statistical',
+    data: {
+      authorities: ['ROLE_ADMIN']
+    },
+    canActivate: [UserRouteAccessService],
+    component: StatisticalComponent
   }
 ];

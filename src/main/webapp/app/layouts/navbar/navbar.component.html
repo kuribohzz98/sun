@@ -7,7 +7,7 @@
         </div>
         <div class="site-mobile-menu-body"></div>
     </div>
-    <div class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+    <div class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner" #inputElement>
 
         <div class="container">
             <div class="row align-items-center">
@@ -39,8 +39,10 @@
                             </li>
                             <!-- data-toggle="modal" data-target="#openlogin" -->
                             <li><a [routerLink]="['gio-hang']" class="nav-link">Giỏ Hàng</a></li>
+                            <li *ngIf="isAuthenticated()"><a [routerLink]="['hoa-don']" class="nav-link">Hóa đơn</a>
+                            </li>
                             <li *ngIf="!isAuthenticated()"><a href="javascript:void(0);" class="alert-link"
-                                     (click)="openLogin(content)">Đăng nhập/ Đăng ký</a></li>
+                                    (click)="openLogin(content)">Đăng nhập/ Đăng ký</a></li>
                             <li *ngIf="isAuthenticated()">
                                 <a href="javascript:void(0);" class="alert-link" (click)="logout()">Đăng xuất</a>
                             </li>
@@ -74,14 +76,16 @@
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
         [ngSwitch]="isAuthenticated()">
         <ul class="navbar-nav ml-auto">
-            <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="/statistical" (click)="collapseNavbar()">
                     <span>
-                        <fa-icon icon="home"></fa-icon>
-                        <span>Home</span>
+                        <fa-icon icon="list-alt"></fa-icon>
+                        <span>
+                            Statistical
+                        </span>
                     </span>
                 </a>
-            </li> -->
+            </li>
 
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
                 routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -203,13 +207,13 @@
                             <span>Logs</span>
                         </a>
                     </li> -->
-                    <li *ngIf="swaggerEnabled">
+                    <!-- <li *ngIf="swaggerEnabled">
                         <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active"
                             (click)="collapseNavbar()">
                             <fa-icon icon="book" fixedWidth="true"></fa-icon>
                             <span>API</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"

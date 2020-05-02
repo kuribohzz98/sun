@@ -5,14 +5,14 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Product Type Id</span></dt>
+                <!-- <dt><span>Product Type Id</span></dt>
                 <dd>
                     <span>{{product.productTypeId}}</span>
                 </dd>
                 <dt><span>Provider Id</span></dt>
                 <dd>
                     <span>{{product.providerId}}</span>
-                </dd>
+                </dd> -->
                 <dt><span>Name</span></dt>
                 <dd>
                     <span>{{product.name}}</span>
@@ -39,7 +39,9 @@
                 </dd>
                 <dt><span>Image</span></dt>
                 <dd>
-                    <span>{{product.image}}</span>
+                    <span><img decode="{{true}}" lazyLoad [defaultImage]="'content/assest/Spinner.gif'"
+                            [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                            style="width: 130px; height: 100px;"></span>
                 </dd>
                 <dt><span>salePrice</span></dt>
                 <dd>
@@ -56,26 +58,23 @@
                 <dt><span>Product Type</span></dt>
                 <dd>
                     <div *ngIf="product.productTypeId">
-                        <a [routerLink]="['/product-type', product.productTypeId, 'view']">{{product.productTypeId}}</a>
+                        <a
+                            [routerLink]="['/product-type', product.productTypeId, 'view']">{{product.productType.name}}</a>
                     </div>
                 </dd>
                 <dt><span>Provider</span></dt>
                 <dd>
                     <div *ngIf="product.providerId">
-                        <a [routerLink]="['/provider', product.providerId, 'view']">{{product.providerId}}</a>
+                        <a [routerLink]="['/provider', product.providerId, 'view']">{{product.provider.name}}</a>
                     </div>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/product', product.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/product', product.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
             </button>
         </div>

@@ -7,6 +7,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,6 +48,15 @@ public class Payment implements Serializable {
     @NotNull
     @Column(name = "delivery_address", nullable = false)
     private String deliveryAddress;
+
+    @Column(name = "transaction_id")
+    private String transactionId;
+
+    @Column(name = "qrcode")
+    private byte[] qrcode = new byte[0];
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
@@ -193,6 +204,30 @@ public class Payment implements Serializable {
         return this;
     }
 
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public byte[] getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(byte[] qrcode) {
+        this.qrcode = qrcode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -217,13 +252,19 @@ public class Payment implements Serializable {
     @Override
     public String toString() {
         return "Payment{" +
-            "id=" + getId() +
-            ", price=" + getPrice() +
-            ", status='" + getStatus() + "'" +
-            ", recipientPhone='" + getRecipientPhone() + "'" +
-            ", deliveryAddress='" + getDeliveryAddress() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
-            "}";
+            "id=" + id +
+            ", userId=" + userId +
+            ", price=" + price +
+            ", status=" + status +
+            ", recipientPhone='" + recipientPhone + '\'' +
+            ", deliveryAddress='" + deliveryAddress + '\'' +
+            ", transactionId='" + transactionId + '\'' +
+            ", qrcode='" + Base64.getEncoder().encodeToString(qrcode) + '\'' +
+            ", description='" + description + '\'' +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            ", products=" + products +
+            ", user=" + user +
+            '}';
     }
 }

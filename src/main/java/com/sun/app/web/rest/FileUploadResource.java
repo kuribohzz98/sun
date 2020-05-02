@@ -13,13 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -48,15 +45,16 @@ public class FileUploadResource {
             .body(photoDTO);
     }
 
-    @PostMapping("/upload/uploadMultiFile")
-    public ResponseEntity<String> uploadMultiFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) {
-        return ResponseEntity.ok().body(this.fileService.doUpload(files));
-    }
+//    @PostMapping("/upload/uploadMultiFile")
+//    public ResponseEntity<String> uploadMultiFileHandlerPOST(@RequestParam("file") List<MultipartFile> files) {
+//        return ResponseEntity.ok().body(this.fileService.doUpload(files));
+//    }
 
     @GetMapping("/getFile/image/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(this.fileService.getPhoto(id));
     }
+
 
 //    @GetMapping("/getFile/images")
 //    public Map<String, String> getImages(@RequestParam("paths") List<String> paths) {

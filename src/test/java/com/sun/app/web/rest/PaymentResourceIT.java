@@ -6,6 +6,7 @@ import com.sun.app.domain.Product;
 import com.sun.app.domain.User;
 import com.sun.app.repository.PaymentRepository;
 import com.sun.app.service.PaymentService;
+import com.sun.app.service.MomoService;
 import com.sun.app.service.dto.PaymentDTO;
 import com.sun.app.service.mapper.PaymentMapper;
 import com.sun.app.web.rest.errors.ExceptionTranslator;
@@ -17,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -80,6 +80,9 @@ public class PaymentResourceIT {
     private PaymentService paymentService;
 
     @Autowired
+    private MomoService momoService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -101,7 +104,7 @@ public class PaymentResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PaymentResource paymentResource = new PaymentResource(paymentService);
+        final PaymentResource paymentResource = new PaymentResource(paymentService, momoService);
         this.restPaymentMockMvc = MockMvcBuilders.standaloneSetup(paymentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -355,10 +358,10 @@ public class PaymentResourceIT {
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllPaymentsWithEagerRelationshipsIsEnabled() throws Exception {
-        PaymentResource paymentResource = new PaymentResource(paymentServiceMock);
+        PaymentResource paymentResource = new PaymentResource(paymentServiceMock, momoService);
         when(paymentServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restPaymentMockMvc = MockMvcBuilders.standaloneSetup(paymentResource)
@@ -375,7 +378,7 @@ public class PaymentResourceIT {
 
     @SuppressWarnings({"unchecked"})
     public void getAllPaymentsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        PaymentResource paymentResource = new PaymentResource(paymentServiceMock);
+        PaymentResource paymentResource = new PaymentResource(paymentServiceMock, momoService);
             when(paymentServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restPaymentMockMvc = MockMvcBuilders.standaloneSetup(paymentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Thống kê theo</label>
+                <select class="form-control" [formControl]="typeFilterControl">
+                    <option *ngFor="let data of typeFilter" [value]="data.value">{{data.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Loại sản phẩm</label>
+                <select class="form-control" [formControl]="productTypeControl">
+                    <option *ngFor="let productType of productTypes" [value]="productType.id">{{productType.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row"> -->
+        <div style="display: block;">
+            <canvas baseChart width="5" height="2" [datasets]="lineChartData" [labels]="lineChartLabels"
+                [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                [chartType]="lineChartType" [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
+    <!-- </div> -->
+</div>

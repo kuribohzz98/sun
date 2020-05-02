@@ -1,5 +1,5 @@
 <div *ngIf="!isAdmin()">
-    <div class="site-block-wrap">
+    <div class="site-block-wrap" style="margin-top: -15px !important;">
         <div class="owl-carousel with-dots">
             <div class="site-blocks-cover overlay overlay-2"
                 style="background-image: url(content/images/silver-and-black-laptop.jpg);" data-aos="fade"
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="site-section" id="properties-section">
         <div class="container">
             <div class="row mb-5">
@@ -28,15 +28,19 @@
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
                         <div class="ftco-media-1">
                             <div class="ftco-media-1-inner">
-                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
-                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]"
+                                    class="d-inline-block mb-4"><img
+                                        [defaultImage]="'content/assest/Spinner.gif'"
+                                        [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
                                         class="img-fluid"></a>
                                 <div class="ftco-media-details">
                                     <h3>{{product.name}}</h3>
                                     <p>{{product.code}}</p>
                                     <div style="margin-top: 10px;">
-                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
-                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        <ng-container *ngIf="product.salePrice; else productSale"
+                                            style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ
+                                                &nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <p class="text-danger d-inline">
                                                 -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
                                             </p>
@@ -54,7 +58,7 @@
             </div>
         </div>
     </div>
-    
+
     <section class="py-5 color-primary site-section how-it-works" id="san-pham">
         <div class="container">
             <div class="row mb-5 justify-content-center">
@@ -71,7 +75,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
-    
+
                 <div class="col-md-4 text-center">
                     <div class="pr-5 second-step">
                         <span>02.</span>
@@ -80,7 +84,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                 </div>
-    
+
                 <div class="col-md-4 text-center">
                     <div class="pr-5">
                         <span>03.</span>
@@ -92,9 +96,9 @@
             </div>
         </div>
     </section>
-    
-    
-    
+
+
+
     <div class="site-section" id="properties-section">
         <div class="container">
             <div class="row mb-5">
@@ -107,15 +111,19 @@
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
                         <div class="ftco-media-1">
                             <div class="ftco-media-1-inner">
-                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
-                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
-                                        class="img-fluid"></a>
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]"
+                                    class="d-inline-block mb-4"><img
+                                        [defaultImage]="'content/assest/Spinner.gif'"
+                                        [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                                        alt="FImageo" class="img-fluid"></a>
                                 <div class="ftco-media-details">
                                     <h3>{{product.name}}</h3>
                                     <p>{{product.code}}</p>
                                     <div style="margin-top: 10px;">
-                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
-                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        <ng-container *ngIf="product.salePrice; else productSale"
+                                            style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ
+                                                &nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <p class="text-danger d-inline">
                                                 -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
                                             </p>
@@ -133,14 +141,15 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <p><a [routerLink]="['/san-pham/'+ productTypeLaptop.code]" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
+                    <p><a [routerLink]="['/san-pham/'+ productTypeLaptop.code]" class="btn btn-primary mr-2 mb-2 ">Xem
+                            tất cả</a></p>
                 </div>
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
     <section class="site-section bg-light" id="services-section">
         <div class="container">
             <div class="row mb-5">
@@ -185,8 +194,8 @@
                         </div>
                     </div>
                 </div>
-    
-    
+
+
                 <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="unit-4 d-flex">
                         <div class="unit-4-icon mr-4"><span class="text-primary flaticon-flat"></span></div>
@@ -223,11 +232,11 @@
                         </div>
                     </div>
                 </div>
-    
+
             </div>
         </div>
     </section>
-    
+
     <div class="site-section" id="properties-section">
         <div class="container">
             <div class="row mb-5">
@@ -240,15 +249,19 @@
                     <div class="col-md-6 col-lg-4 mb-5 mb-lg-5" data-aos="fade-up" [attr.data-aos-delay]="i*100">
                         <div class="ftco-media-1">
                             <div class="ftco-media-1-inner">
-                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
-                                        src="{{'data:image/png;base64,' + product.image}}" alt="FImageo"
-                                        class="img-fluid"></a>
+                                <a [routerLink]="['/thong-tin-san-pham/' + product.code]"
+                                    class="d-inline-block mb-4"><img
+                                        [defaultImage]="'content/assest/Spinner.gif'"
+                                        [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                                        alt="FImageo" class="img-fluid"></a>
                                 <div class="ftco-media-details">
                                     <h3>{{product.name}}</h3>
                                     <p>{{product.code}}</p>
                                     <div style="margin-top: 10px;">
-                                        <ng-container *ngIf="product.salePrice; else productSale" style="display: inline;">
-                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                        <ng-container *ngIf="product.salePrice; else productSale"
+                                            style="display: inline;">
+                                            <p class="font-weight-bold d-inline">{{product.salePrice | number}}đ
+                                                &nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             <p class="text-danger d-inline">
                                                 -{{(product.sellPrice - product.salePrice)*100/product.salePrice | number: '1.0-0'}}%
                                             </p>
@@ -267,7 +280,8 @@
         </div>
         <div class="row">
             <div class="col text-center">
-                <p><a [routerLink]="['/san-pham/' + productTypeTivi.code]" class="btn btn-primary mr-2 mb-2 ">Xem tất cả</a></p>
+                <p><a [routerLink]="['/san-pham/' + productTypeTivi.code]" class="btn btn-primary mr-2 mb-2 ">Xem tất
+                        cả</a></p>
             </div>
         </div>
     </div>

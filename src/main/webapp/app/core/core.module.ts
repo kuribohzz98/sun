@@ -1,6 +1,4 @@
-import { RegisterComponent } from 'app/account/register/register.component';
 import { AccountModule } from './../account/account.module';
-import { SunSharedModule } from './../shared/shared.module';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

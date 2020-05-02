@@ -5,27 +5,32 @@ import { PaymentStatus } from 'app/shared/model/enumerations/payment-status.mode
 export interface IPayment {
   id?: number;
   price?: number;
-  status?: PaymentStatus;
+  status?: String;
   recipientPhone?: string;
   deliveryAddress?: string;
-  createdAt?: Moment;
+  createdAt?: any;
   updatedAt?: Moment;
   products?: IProduct[];
   userLogin?: string;
   userId?: number;
+  transactionId?: string;
+  qrcode?: any;
+  description?: string;
 }
 
 export class Payment implements IPayment {
   constructor(
     public id?: number,
     public price?: number,
-    public status?: PaymentStatus,
+    public status?: String,
     public recipientPhone?: string,
     public deliveryAddress?: string,
-    public createdAt?: Moment,
+    public createdAt?: any,
     public updatedAt?: Moment,
     public products?: IProduct[],
     public userLogin?: string,
-    public userId?: number
+    public userId?: number,
+    public transactionId?: string,
+    public qrcode?: any
   ) {}
 }

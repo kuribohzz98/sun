@@ -22,12 +22,12 @@
                     <th scope="col" jhiSortBy="id"><span>ID</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="productTypeId"><span>Product Type Id</span>
+                    <!-- <th scope="col" jhiSortBy="productTypeId"><span>Product Type Id</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="providerId"><span>Provider Id</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
+                    </th> -->
                     <th scope="col" jhiSortBy="name"><span>Name</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
@@ -52,12 +52,12 @@
                     <th scope="col" jhiSortBy="salePrice"><span>Sale Price</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="createdAt"><span>Created At</span>
+                    <!-- <th scope="col" jhiSortBy="createdAt"><span>Created At</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="updatedAt"><span>Updated At</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
+                    </th> -->
                     <th scope="col" jhiSortBy="productTypeId"><span>Product Type</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
@@ -70,8 +70,8 @@
             <tbody>
                 <tr *ngFor="let product of products ;trackBy: trackId">
                     <td><a [routerLink]="['/product', product.id, 'view' ]">{{product.id}}</a></td>
-                    <td>{{product.productTypeId}}</td>
-                    <td>{{product.providerId}}</td>
+                    <!-- <td>{{product.productTypeId}}</td>
+                    <td>{{product.providerId}}</td> -->
                     <td>{{product.name}}</td>
                     <td>{{product.code}}</td>
                     <td>{{product.sellPrice}}</td>
@@ -80,25 +80,22 @@
                     <td>{{product.productLine}}</td>
                     <!--  -->
                     <td>
-                        <!-- <ng-container *ngIf="product.imageData; else elseTemplate">
-                            <img [src]="'data:image/png;base64,' + product.imageData" style="width: 130px; height: 100px;">
-                        </ng-container>
-                        <ng-template #elseTemplate> -->
-                            <img [src]="'http://localhost:9000/api/getFile/image/' + product.photoId"style="width: 130px; height: 100px;">
-                        <!-- </ng-template> -->
+                        <img decode="{{true}}" lazyLoad [defaultImage]="'content/assest/Spinner.gif'"
+                            [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                            style="width: 130px; height: 100px;">
                     </td>
                     <td>{{product.salePrice}}</td>
-                    <td>{{product.createdAt | date:'medium'}}</td>
-                    <td>{{product.updatedAt | date:'medium'}}</td>
+                    <!-- <td>{{product.createdAt | date:'medium'}}</td>
+                    <td>{{product.updatedAt | date:'medium'}}</td> -->
                     <td>
                         <div *ngIf="product.productTypeId">
                             <a
-                                [routerLink]="['/product-type', product.productTypeId , 'view' ]">{{product.productTypeId}}</a>
+                                [routerLink]="['/product-type', product.productTypeId , 'view' ]">{{product.productType.name}}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="product.providerId">
-                            <a [routerLink]="['/provider', product.providerId , 'view' ]">{{product.providerId}}</a>
+                            <a [routerLink]="['/provider', product.providerId , 'view' ]">{{product.provider.name}}</a>
                         </div>
                     </td>
                     <td class="text-right">

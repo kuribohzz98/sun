@@ -2,9 +2,8 @@ package com.sun.app.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
+import java.util.*;
+
 import com.sun.app.domain.enumeration.PaymentStatus;
 
 /**
@@ -25,6 +24,12 @@ public class PaymentDTO implements Serializable {
 
     @NotNull
     private String deliveryAddress;
+
+    private String transactionId;
+
+    private byte[] qrcode = new byte[0];
+
+    private String description;
 
     private Instant createdAt;
 
@@ -116,6 +121,30 @@ public class PaymentDTO implements Serializable {
         this.userLogin = userLogin;
     }
 
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public byte[] getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(byte[] qrcode) {
+        this.qrcode = qrcode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -140,15 +169,19 @@ public class PaymentDTO implements Serializable {
     @Override
     public String toString() {
         return "PaymentDTO{" +
-            "id=" + getId() +
-            ", price=" + getPrice() +
-            ", status='" + getStatus() + "'" +
-            ", recipientPhone='" + getRecipientPhone() + "'" +
-            ", deliveryAddress='" + getDeliveryAddress() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
-            ", userId=" + getUserId() +
-            ", userLogin='" + getUserLogin() + "'" +
-            "}";
+            "id=" + id +
+            ", price=" + price +
+            ", status=" + status +
+            ", recipientPhone='" + recipientPhone + '\'' +
+            ", deliveryAddress='" + deliveryAddress + '\'' +
+            ", transactionId='" + transactionId + '\'' +
+            ", qrcode='" + Base64.getEncoder().encodeToString(qrcode) + '\'' +
+            ", description='" + description + '\'' +
+            ", createdAt=" + createdAt +
+            ", updatedAt=" + updatedAt +
+            ", products=" + products +
+            ", userId=" + userId +
+            ", userLogin='" + userLogin + '\'' +
+            '}';
     }
 }

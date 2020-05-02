@@ -1,0 +1,33 @@
+<div *ngIf="!isAdmin() && isAuthenticated()">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
+        data-aos="fade">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-5 mx-auto mt-lg-5 text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="font-family: Arial, Helvetica, sans-serif;">
+    <div class="row card-bill">
+        <div class="col-md-12" *ngFor="let payment of payments; let i=index"
+            style="margin-top: 20px; margin-bottom: 20px;" (click)="comeInBillProperty(payment.transactionId)">
+            <div class="card text-center">
+                <div class="card-header">
+                    {{i+1}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{payment.transactionId}}</h5>
+                    <p class="card-text">Ngày tạo: {{payment.createdAt}}</p>
+                    <p class="card-text">Tổng tiền: {{payment.price| number}}đ</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <div *ngIf="payment.status == 'UNPAID'" class="text-danger">Chưa thanh toán</div>
+                    <div *ngIf="payment.status != 'UNPAID'" class="text-success">Đã thanh toán</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

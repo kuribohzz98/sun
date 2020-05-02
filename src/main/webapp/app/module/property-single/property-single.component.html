@@ -27,7 +27,7 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img class="d-block img-fluid" style="height: 20rem; width: 100%;"
-                  src="{{'data:image/png;base64,' + product.image}}" alt="">
+                  [src]="'http://localhost:9000/api/getFile/image/' + product.photoId" alt="">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
@@ -47,17 +47,19 @@
               <div class="col-lg-3">
                 <p style="font-family: Arial, Helvetica, sans-serif;">Chọn số lượng</p>
               </div>
-              <div class="col-lg-9">
+              <div class="col-lg-4">
                 <button [disabled]="amount <= 1" class="btn btn-secondary" style="display: inline;"
                   (click)="addAmount(amount - 1)">
                   <fa-icon [icon]="faMinus"></fa-icon>
                 </button>
                 <p class="align-self-center" style="display: inline; margin-left: 1rem; margin-right: 1rem;">{{amount}}
                 </p>
-                <button [disabled]="amount >= product.quantity" class="btn btn-secondary" style="display: inline;" (click)="addAmount(amount + 1)">
+                <button [disabled]="amount >= product.quantity" class="btn btn-secondary" style="display: inline;"
+                  (click)="addAmount(amount + 1)">
                   <fa-icon [icon]="faPlus"></fa-icon>
                 </button>
               </div>
+              <div class="col-lg-5"><p>(Còn lại: {{product.quantity}})</p></div>
             </div>
             <button class="btn btn-primary" (click)="buyNow()">
               <p style="margin: 5px 30px 5px 30px;">Mua ngay</p>
@@ -136,8 +138,7 @@
             <ul class="comment-list" *ngFor="let evaluate of evaluates; let i=index">
               <li class="comment">
                 <div class="vcard bio">
-                  <img src="https://dienmaycholon.vn/public/picture/experience/article_2523.jpg"
-                    alt="Image placeholder">
+                  <fa-icon style="font-size: 2rem;" [icon]="faUser"></fa-icon>
                 </div>
                 <div class="comment-body">
                   <p class="font-weight-bold">{{evaluate.user.firstName}}&nbsp;{{evaluate.user.lastName}}</p>

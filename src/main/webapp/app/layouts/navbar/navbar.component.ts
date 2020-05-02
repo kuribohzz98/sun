@@ -1,7 +1,8 @@
+import { LoginRegisterComponent } from './../../core/login-register/login-register.component';
 import { NotifierService } from 'angular-notifier';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IProductType } from 'app/shared/model/product-type.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { VERSION } from 'app/app.constants';
 import { AccountService } from 'app/core/auth/account.service';
@@ -16,6 +17,9 @@ import { ProductTypeService } from './../../entities/product-type/product-type.s
   styleUrls: ['navbar.scss']
 })
 export class NavbarComponent implements OnInit {
+  @ViewChild('inputElement', { static: false })
+  inputElement?: ElementRef;
+
   inProduction?: boolean;
   isNavbarCollapsed = true;
   swaggerEnabled?: boolean;
@@ -59,7 +63,8 @@ export class NavbarComponent implements OnInit {
   }
 
   openLogin(content: any) {
-    this.modalService.open(content, { size: 'lg' }).result.then(result => {});
+    // this.modalService.open(content, { size: 'lg' }).result.then(result => {});
+    const modalRef = this.modalService.open(LoginRegisterComponent, { size: 'lg' });
   }
 
   login(): void {

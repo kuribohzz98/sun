@@ -1,0 +1,68 @@
+<div *ngIf="!isAdmin() && isAuthenticated()">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(content/images/hero_1.jpg);"
+        data-aos="fade">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-5 mx-auto mt-lg-5 text-center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="font-family: Arial, Helvetica, sans-serif;">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col text-center">
+                <h4 class="section-title mb-3">Hoá đơn</h4>
+            </div>
+        </div>
+        <div *ngIf="payment.status == 'UNPAID'">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="font-weight-bold">Vui lòng mở ứng dụng momo trên điện thoại và quét mã dưới đây để thực hiện
+                        thanh
+                        toán
+                        <img style="width: 50px; height: 50px;" src="https://static.mservice.io/img/logo-momo.png"></p>
+                    <p class="text-danger">Lưu ý: <i>Bạn phải thanh toán qua momo mới có thể hoàn tất giao dịch. Sau khi đã
+                            thanh toán vui lòng bấm nút "Xác nhận thanh toán" phía dưới để hoàn tất giao dịch</i></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <img [src]="'data:image/png;base64,' + payment.qrcode" alt="Mã code thanh toán">
+                </div>
+            </div>
+        </div>
+        <div *ngIf="payment.status != 'UNPAID'" class="text-center" style="margin-top:15px; margin-bottom: 15px;">
+            <h4 class="text-success">Đã thanh toán</h4>
+        </div>
+        <div class="row" style="margin-bottom: 20px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Mã sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá (VNĐ)</th>
+                        <th scope="col">Thành tiền (VNĐ)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of payment.products; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{product.name}}</td>
+                        <td>{{product.code}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.sellPrice | number}}</td>
+                        <td>{{product.sellPrice * product.quantity | number}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="payment.status == 'UNPAID'" class="row" style="margin-bottom: 30px;">
+            <div class="col text-center">
+                <button class="btn btn-primary" (click)="confim()">Xác nhận thanh toán</button>
+            </div>
+        </div>
+    </div>
+</div>

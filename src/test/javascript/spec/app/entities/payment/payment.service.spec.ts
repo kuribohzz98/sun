@@ -25,7 +25,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Payment(0, 0, PaymentStatus.PAID, 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
+      elemDefault = new Payment(0, 0, 'UNPAID', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {

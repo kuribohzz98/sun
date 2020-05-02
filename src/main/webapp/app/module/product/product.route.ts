@@ -1,12 +1,8 @@
 import { ProductTypeService } from './../../service/product-type.service';
 import { ProductType } from 'app/shared/model/product-type.model';
 import { IProductType } from '../../shared/model/product-type.model';
-import { Product } from 'app/shared/model/product.model';
-import { HttpResponse } from '@angular/common/http';
 import { flatMap } from 'rxjs/operators';
 import { Observable, of, EMPTY } from 'rxjs';
-import { ProductService } from '../../service/product.service';
-import { IProduct } from '../../shared/model/product.model';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 

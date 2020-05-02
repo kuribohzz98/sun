@@ -1,6 +1,7 @@
 package com.sun.app.repository;
 
 import com.sun.app.domain.Payment;
+import com.sun.app.domain.enumeration.PaymentStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -26,4 +27,12 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     @Query("select payment from Payment payment left join fetch payment.products where payment.id =:id")
     Optional<Payment> findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select payment from Payment payment left join fetch payment.products where payment.transactionId =:transactionId")
+    Optional<Payment> findOneByTransactionIdWithEagerRelationships(@Param("transactionId") String transactionId);
+
+    Optional<List<Payment>> findAllByUserId(Long userId);
+
+    @Modifying(clearAutomatically = true)
+    @Query("update Payment payment set payment.status =:status, payment.qrcode =:qrcode where payment.transactionId =:transactionId")
+    Integer updateStatusAndQrcodeByTransactionId(@Param("status") PaymentStatus status, @Param("status") byte[] qrcode, @Param("transactionId") String transactionId);
 }

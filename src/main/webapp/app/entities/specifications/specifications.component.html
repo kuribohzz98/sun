@@ -21,8 +21,8 @@
             <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="title"><span>Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="content"><span>Content</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="updatedAt"><span>Updated At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="createdAt"><span>Created At</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="updatedAt"><span>Updated At</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="productId"><span>Product</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
@@ -32,8 +32,8 @@
                 <td><a [routerLink]="['/specifications', specifications.id, 'view' ]">{{specifications.id}}</a></td>
                 <td>{{specifications.title}}</td>
                 <td>{{specifications.content}}</td>
-                <td>{{specifications.createdAt | date:'medium'}}</td>
-                <td>{{specifications.updatedAt | date:'medium'}}</td>
+                <!-- <td>{{specifications.createdAt | date:'medium'}}</td>
+                <td>{{specifications.updatedAt | date:'medium'}}</td> -->
                 <td>
                     <div *ngIf="specifications.productId">
                         <a [routerLink]="['/product', specifications.productId , 'view' ]" >{{specifications.productId}}</a>

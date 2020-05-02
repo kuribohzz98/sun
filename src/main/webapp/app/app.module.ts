@@ -1,3 +1,4 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { AccountModule } from './account/account.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +17,6 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { ModuleComponentModule } from './module/module-component.module';
 import { LoginRegisterComponent } from './core/login-register/login-register.component';
 import { NotifierModule } from 'angular-notifier';
-import { LazyLoadImageModule, intersectionObserverPreset } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -30,9 +30,10 @@ import { LazyLoadImageModule, intersectionObserverPreset } from 'ng-lazyload-ima
     SunAppRoutingModule,
     AccountModule,
     NotifierModule,
-    LazyLoadImageModule
+    ReactiveFormsModule
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, LoginRegisterComponent],
+  entryComponents: [LoginRegisterComponent],
   bootstrap: [MainComponent]
 })
 export class SunAppModule {}

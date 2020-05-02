@@ -2544,3 +2544,7 @@ h5,
     display: none;
   }
 }
+
+.card-bill:hover {
+  cursor: pointer;
+}

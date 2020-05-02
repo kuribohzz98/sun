@@ -6,36 +6,32 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                           formControlName="name"/>
-                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('name')?.errors?.required">
-                        This field is required.
+                    <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_code">Code</label>
-                    <input type="text" class="form-control" name="code" id="field_code"
-                           formControlName="code"/>
+                    <input type="text" class="form-control" name="code" id="field_code" formControlName="code" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_sellPrice">Sell Price</label>
                     <input type="number" class="form-control" name="sellPrice" id="field_sellPrice"
-                           formControlName="sellPrice"/>
-                    <div *ngIf="editForm.get('sellPrice')!.invalid && (editForm.get('sellPrice')!.dirty || editForm.get('sellPrice')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('sellPrice')?.errors?.required">
-                        This field is required.
+                        formControlName="sellPrice" />
+                    <div
+                        *ngIf="editForm.get('sellPrice')!.invalid && (editForm.get('sellPrice')!.dirty || editForm.get('sellPrice')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('sellPrice')?.errors?.required">
+                            This field is required.
                         </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('sellPrice')?.errors?.number">
+                        <small class="form-text text-danger" [hidden]="!editForm.get('sellPrice')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -43,14 +39,13 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_importPrice">Import Price</label>
                     <input type="number" class="form-control" name="importPrice" id="field_importPrice"
-                           formControlName="importPrice"/>
-                    <div *ngIf="editForm.get('importPrice')!.invalid && (editForm.get('importPrice')!.dirty || editForm.get('importPrice')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('importPrice')?.errors?.required">
-                        This field is required.
+                        formControlName="importPrice" />
+                    <div
+                        *ngIf="editForm.get('importPrice')!.invalid && (editForm.get('importPrice')!.dirty || editForm.get('importPrice')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('importPrice')?.errors?.required">
+                            This field is required.
                         </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('importPrice')?.errors?.number">
+                        <small class="form-text text-danger" [hidden]="!editForm.get('importPrice')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -58,14 +53,13 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_quantity">Quantity</label>
                     <input type="number" class="form-control" name="quantity" id="field_quantity"
-                           formControlName="quantity"/>
-                    <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('quantity')?.errors?.required">
-                        This field is required.
+                        formControlName="quantity" />
+                    <div
+                        *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('quantity')?.errors?.required">
+                            This field is required.
                         </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('quantity')?.errors?.number">
+                        <small class="form-text text-danger" [hidden]="!editForm.get('quantity')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>
@@ -73,17 +67,17 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_productLine">Product Line</label>
                     <input type="text" class="form-control" name="productLine" id="field_productLine"
-                           formControlName="productLine"/>
+                        formControlName="productLine" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_image">Image</label>
-                    <input type="file" class="form-control" name="image" id="field_image"
-                           formControlName="image" (change)="handleFileInput($event.target.files)" />
+                    <input type="file" class="form-control" name="image" id="field_image" formControlName="image"
+                        (change)="handleFileInput($event.target.files)" accept="image/*" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_point">salePrice</label>
                     <input type="number" class="form-control" name="salePrice" id="field_point"
-                           formControlName="salePrice"/>
+                        formControlName="salePrice" />
                 </div>
                 <!-- <div class="form-group">
                     <label class="form-control-label" for="field_createdAt">Created At</label>
@@ -120,14 +114,17 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_productType">Product Type</label>
-                    <select class="form-control" id="field_productType" name="productType" formControlName="productTypeId">
+                    <select class="form-control" id="field_productType" name="productType"
+                        formControlName="productTypeId">
                         <option *ngIf="!editForm.get('productTypeId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="productTypeOption.id" *ngFor="let productTypeOption of producttypes; trackBy: trackById">{{productTypeOption.name}}</option>
+                        <option [ngValue]="productTypeOption.id"
+                            *ngFor="let productTypeOption of producttypes; trackBy: trackById">
+                            {{productTypeOption.name}}</option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('productTypeId')!.invalid && (editForm.get('productTypeId')!.dirty || editForm.get('productTypeId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('productTypeId')?.errors?.required">
+                <div
+                    *ngIf="editForm.get('productTypeId')!.invalid && (editForm.get('productTypeId')!.dirty || editForm.get('productTypeId')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('productTypeId')?.errors?.required">
                         This field is required.
                     </small>
                 </div>
@@ -135,21 +132,24 @@
                     <label class="form-control-label" for="field_provider">Provider</label>
                     <select class="form-control" id="field_provider" name="provider" formControlName="providerId">
                         <option *ngIf="!editForm.get('providerId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="providerOption.id" *ngFor="let providerOption of providers; trackBy: trackById">{{providerOption.name}}</option>
+                        <option [ngValue]="providerOption.id"
+                            *ngFor="let providerOption of providers; trackBy: trackById">{{providerOption.name}}
+                        </option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('providerId')!.invalid && (editForm.get('providerId')!.dirty || editForm.get('providerId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('providerId')?.errors?.required">
+                <div
+                    *ngIf="editForm.get('providerId')!.invalid && (editForm.get('providerId')!.dirty || editForm.get('providerId')!.touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('providerId')?.errors?.required">
                         This field is required.
                     </small>
                 </div>
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>

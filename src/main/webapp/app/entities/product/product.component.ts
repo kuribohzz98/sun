@@ -25,8 +25,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-  defaultImg: string = 'content/assest/Eclipse.gif';
-  image: String = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 
   constructor(
     protected productService: ProductService,
