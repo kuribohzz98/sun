@@ -130,7 +130,7 @@ export class PropertySingleComponent implements OnInit, OnDestroy {
       id: this.product.id,
       name: this.product.name,
       code: this.product.code,
-      photoId: this.product.photoId,
+      photo: this.product.photo,
       sellPrice: this.product.sellPrice,
       salePrice: this.product.salePrice,
       quantity: this.amount,

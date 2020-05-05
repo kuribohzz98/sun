@@ -32,8 +32,8 @@ public class Product implements Serializable {
     @Column(name = "provider_id", nullable = false)
     private Integer providerId;
 
-    @Column(name = "photo_id")
-    private Integer photoId;
+    @Column(name = "photo")
+    private String photo;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -90,9 +90,9 @@ public class Product implements Serializable {
     @OneToMany(mappedBy = "product")
     private Set<Specifications> specifications = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "photo_id", insertable = false, updatable = false)
-    private Photo photo;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "photo_id", insertable = false, updatable = false)
+    // private Photo photo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -207,17 +207,17 @@ public class Product implements Serializable {
         this.productLine = productLine;
     }
 
-    public Product photoId(Integer photoId) {
-        this.photoId = photoId;
+    public Product photo(String photo) {
+        this.photo = photo;
         return this;
     }
 
-    public Integer getPhotoId() {
-        return photoId;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotoId(Integer photoId) {
-        this.photoId = photoId;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Integer getSalePrice() {
@@ -329,14 +329,6 @@ public class Product implements Serializable {
         this.specifications = specifications;
     }
 
-    public Photo getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -361,7 +353,7 @@ public class Product implements Serializable {
             "id=" + getId() +
             ", productTypeId=" + getProductTypeId() +
             ", providerId=" + getProviderId() +
-            ", photoId=" + getPhotoId() +
+            ", photo=" + getPhoto() +
             ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
             ", sellPrice=" + getSellPrice() +

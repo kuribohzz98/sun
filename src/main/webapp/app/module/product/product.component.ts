@@ -40,7 +40,6 @@ export class ProductComponent implements OnInit, OnDestroy {
         mergeMap(data =>
           this.activatedRoute.url.pipe(
             mergeMap(url => {
-              console.log('_______', url);
               this.url = url;
               this.productType = ProductCodeToName[url[url.length - 1].path];
               return this.activatedRoute.queryParams;
@@ -88,8 +87,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   addPramsProvider(index: number): void {
-    const paramsTemp = { ...this.queryParam };
+    const paramsTemp = {} as any;
     paramsTemp.provider = this.providers[index].code;
+    if (this.formPrice) this.formPrice.patchValue({ from: '', to: '' });
     this.router.navigate(['/' + this.url[0].path + '/' + this.url[1].path], { queryParams: paramsTemp });
   }
 

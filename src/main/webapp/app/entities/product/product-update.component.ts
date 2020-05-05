@@ -131,12 +131,13 @@ export class ProductUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const typeFile = this.fileToUpload ? this.fileToUpload.name.split('.') : null;
-    const nameFile = typeFile ? uuid() + '.' + typeFile[typeFile.length - 1] : '';
+    // const typeFile = this.fileToUpload ? this.fileToUpload.name.split('.') : null;
+    // const nameFile = typeFile ? uuid() + '.' + typeFile[typeFile.length - 1] : '';
     const product = this.createFromForm();
     if (this.fileToUpload) {
-      this.fileUploadService.uploadOneFile(this.fileToUpload, nameFile).subscribe(photo => {
-        product.photoId = photo.id;
+      console.log(this.fileToUpload);
+      this.fileUploadService.uploadImage(this.fileToUpload).subscribe(res => {
+        product.photo = res.name || undefined;
         if (product.id !== undefined) {
           return this.subscribeToSaveResponse(this.productService.update(product));
         }

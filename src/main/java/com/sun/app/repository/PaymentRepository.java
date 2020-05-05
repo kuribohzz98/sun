@@ -33,6 +33,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     Optional<List<Payment>> findAllByUserId(Long userId);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Payment payment set payment.status =:status, payment.qrcode =:qrcode where payment.transactionId =:transactionId")
-    Integer updateStatusAndQrcodeByTransactionId(@Param("status") PaymentStatus status, @Param("status") byte[] qrcode, @Param("transactionId") String transactionId);
+    @Query("update Payment payment set payment.status =:status where payment.transactionId =:transactionId")
+    Integer updateStatusByTransactionId(@Param("status") PaymentStatus status, @Param("transactionId") String transactionId);
 }

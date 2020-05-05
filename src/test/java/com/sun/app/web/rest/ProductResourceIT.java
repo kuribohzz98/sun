@@ -64,8 +64,8 @@ public class ProductResourceIT {
     private static final String DEFAULT_PRODUCT_LINE = "AAAAAAAAAA";
     private static final String UPDATED_PRODUCT_LINE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_PHOTO_ID = 1;
-    private static final Integer UPDATED_PHOTO_ID = 2;
+    private static final String DEFAULT_PHOTO = "AAAAAAAAAA";
+    private static final String UPDATED_PHOTO = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_POINT = 1;
     private static final Integer UPDATED_POINT = 2;
@@ -126,7 +126,7 @@ public class ProductResourceIT {
         Product product = new Product()
             .productTypeId(DEFAULT_PRODUCT_TYPE_ID)
             .providerId(DEFAULT_PROVIDER_ID)
-            .photoId(DEFAULT_PHOTO_ID)
+            .photo(DEFAULT_PHOTO)
             .name(DEFAULT_NAME)
             .code(DEFAULT_CODE)
             .sellPrice(DEFAULT_SELL_PRICE)
@@ -168,7 +168,7 @@ public class ProductResourceIT {
         Product product = new Product()
             .productTypeId(UPDATED_PRODUCT_TYPE_ID)
             .providerId(UPDATED_PROVIDER_ID)
-            .photoId(UPDATED_PHOTO_ID)
+            .photo(UPDATED_PHOTO)
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .sellPrice(UPDATED_SELL_PRICE)
@@ -224,7 +224,7 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getProductTypeId()).isEqualTo(DEFAULT_PRODUCT_TYPE_ID);
         assertThat(testProduct.getProviderId()).isEqualTo(DEFAULT_PROVIDER_ID);
-        assertThat(testProduct.getPhotoId()).isEqualTo(DEFAULT_PHOTO_ID);
+        assertThat(testProduct.getPhoto()).isEqualTo(DEFAULT_PHOTO);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProduct.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testProduct.getSellPrice()).isEqualTo(DEFAULT_SELL_PRICE);
@@ -422,7 +422,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].productTypeId").value(hasItem(DEFAULT_PRODUCT_TYPE_ID)))
             .andExpect(jsonPath("$.[*].providerId").value(hasItem(DEFAULT_PROVIDER_ID)))
-            .andExpect(jsonPath("$.[*].photoId").value(hasItem(DEFAULT_PHOTO_ID)))
+            .andExpect(jsonPath("$.[*].photo").value(hasItem(DEFAULT_PHOTO)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].sellPrice").value(hasItem(DEFAULT_SELL_PRICE.intValue())))
@@ -447,7 +447,7 @@ public class ProductResourceIT {
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.productTypeId").value(DEFAULT_PRODUCT_TYPE_ID))
             .andExpect(jsonPath("$.providerId").value(DEFAULT_PROVIDER_ID))
-            .andExpect(jsonPath("$.photoId").value(DEFAULT_PHOTO_ID))
+            .andExpect(jsonPath("$.photo").value(DEFAULT_PHOTO))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.sellPrice").value(DEFAULT_SELL_PRICE.intValue()))
@@ -482,7 +482,7 @@ public class ProductResourceIT {
         updatedProduct
             .productTypeId(UPDATED_PRODUCT_TYPE_ID)
             .providerId(UPDATED_PROVIDER_ID)
-            .photoId(UPDATED_PHOTO_ID)
+            .photo(UPDATED_PHOTO)
             .name(UPDATED_NAME)
             .code(UPDATED_CODE)
             .sellPrice(UPDATED_SELL_PRICE)
@@ -505,7 +505,7 @@ public class ProductResourceIT {
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getProductTypeId()).isEqualTo(UPDATED_PRODUCT_TYPE_ID);
         assertThat(testProduct.getProviderId()).isEqualTo(UPDATED_PROVIDER_ID);
-        assertThat(testProduct.getPhotoId()).isEqualTo(UPDATED_PHOTO_ID);
+        assertThat(testProduct.getPhoto()).isEqualTo(UPDATED_PHOTO);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProduct.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testProduct.getSellPrice()).isEqualTo(UPDATED_SELL_PRICE);

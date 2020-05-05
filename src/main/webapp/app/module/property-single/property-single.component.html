@@ -26,8 +26,8 @@
 
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block img-fluid" style="height: 20rem; width: 100%;"
-                  [src]="'http://localhost:9000/api/getFile/image/' + product.photoId" alt="">
+                <img class="d-block img-fluid" [lazyLoad]="'http://localhost:3002/image/' + product.photo" style="height: 20rem; width: 100%;"
+                  [defaultImage]="'content/assest/Spinner.gif'" [src]="product.photo">
                 <div class="carousel-caption d-none d-md-block">
                 </div>
               </div>
@@ -42,7 +42,7 @@
               <span class="sr-only" aria-hidden="true">Next</span>
             </a>
           </div>
-          <div style="margin-top: 2rem; margin-bottom: 2rem;">
+          <div style="margin-top: 2rem; margin-bottom: 2rem;" *ngIf="product.quantity > 0">
             <div class="row align-items-center" style="margin-bottom: 1rem">
               <div class="col-lg-3">
                 <p style="font-family: Arial, Helvetica, sans-serif;">Chọn số lượng</p>
@@ -59,7 +59,9 @@
                   <fa-icon [icon]="faPlus"></fa-icon>
                 </button>
               </div>
-              <div class="col-lg-5"><p>(Còn lại: {{product.quantity}})</p></div>
+              <div class="col-lg-5">
+                <p>(Còn lại: {{product.quantity}})</p>
+              </div>
             </div>
             <button class="btn btn-primary" (click)="buyNow()">
               <p style="margin: 5px 30px 5px 30px;">Mua ngay</p>
@@ -69,6 +71,11 @@
                 <fa-icon [icon]="faShoppingCart"></fa-icon>&nbsp;&nbsp; Thêm vào giỏ hàng
               </p>
             </button>
+          </div>
+          <div class="row" *ngIf="product.quantity <= 0">
+            <div class="col text-center">
+              <p style="font-family: Arial, Helvetica, sans-serif; font-size: 30px;" class="text-danger">Hết hàng</p>
+            </div>
           </div>
         </div>
         <div class="col-lg-6 pl-lg-5 ml-auto">

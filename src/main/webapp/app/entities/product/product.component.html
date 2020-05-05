@@ -43,9 +43,9 @@
                     <th scope="col" jhiSortBy="quantity"><span>Quantity</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="productLine"><span>Product Line</span>
+                    <!-- <th scope="col" jhiSortBy="productLine"><span>Product Line</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
-                    </th>
+                    </th> -->
                     <th scope="col" jhiSortBy="image"><span>Image</span>
                         <fa-icon [icon]="'sort'"></fa-icon>
                     </th>
@@ -77,11 +77,11 @@
                     <td>{{product.sellPrice}}</td>
                     <td>{{product.importPrice}}</td>
                     <td>{{product.quantity}}</td>
-                    <td>{{product.productLine}}</td>
+                    <!-- <td>{{product.productLine}}</td> -->
                     <!--  -->
                     <td>
                         <img decode="{{true}}" lazyLoad [defaultImage]="'content/assest/Spinner.gif'"
-                            [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                            [lazyLoad]="'http://localhost:3002/image/' + product.photo"
                             style="width: 130px; height: 100px;">
                     </td>
                     <td>{{product.salePrice}}</td>

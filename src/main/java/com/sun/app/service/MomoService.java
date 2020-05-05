@@ -123,7 +123,7 @@ public class MomoService {
         }
         confim(momoQRResponse);
         if(momoQRResponse.getStatus() == 0) {
-            paymentService.updateStatusByTransactionId(PaymentStatus.PAID, null, momoQRResponse.getPartnerRefId());
+            paymentService.updateStatusByTransactionId(PaymentStatus.PAID, momoQRResponse.getPartnerRefId());
         }
 
         return momoQRResponse;

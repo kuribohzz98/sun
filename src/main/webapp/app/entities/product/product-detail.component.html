@@ -33,14 +33,10 @@
                 <dd>
                     <span>{{product.quantity}}</span>
                 </dd>
-                <dt><span>Product Line</span></dt>
-                <dd>
-                    <span>{{product.productLine}}</span>
-                </dd>
                 <dt><span>Image</span></dt>
                 <dd>
                     <span><img decode="{{true}}" lazyLoad [defaultImage]="'content/assest/Spinner.gif'"
-                            [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId"
+                            [lazyLoad]="'http://localhost:3002/image/' + product.photo"
                             style="width: 130px; height: 100px;"></span>
                 </dd>
                 <dt><span>salePrice</span></dt>

@@ -68,7 +68,7 @@
                     <div class="ftco-media-1-inner">
                       <a [routerLink]="['/thong-tin-san-pham/' + product.code]" class="d-inline-block mb-4"><img
                         [defaultImage]="'content/assest/Spinner.gif'"
-                        [lazyLoad]="'http://localhost:9000/api/getFile/image/' + product.photoId" class="img-fluid"></a>
+                        [lazyLoad]="'http://localhost:3002/image/' + product.photo" class="img-fluid"></a>
                       <div class="ftco-media-details">
                         <h3>{{product.name}}</h3>
                         <p>{{product.code}}</p>

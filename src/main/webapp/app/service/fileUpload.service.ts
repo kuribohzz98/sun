@@ -1,9 +1,12 @@
 import { IPhoto } from './../shared/model/photo.model';
 import { SERVER_API_URL } from './../app.constants';
-import { map } from 'rxjs/operators';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+
+type UploadImage = {
+  name: string;
+};
 
 @Injectable({ providedIn: 'root' })
 export class FileUploadService {
@@ -18,6 +21,12 @@ export class FileUploadService {
 
   getImages(paths: string[]) {
     return this.http.get(SERVER_API_URL + 'api/getFile/images', { params: { paths } });
+  }
+
+  public uploadImage(file: any): Observable<UploadImage> {
+    const fd = new FormData();
+    fd.append('file', file);
+    return this.http.post<UploadImage>('http://localhost:3002/image', fd);
   }
 
   // uploadMultiFile(code: string): Observable<HttpResponse<IProduct>> {

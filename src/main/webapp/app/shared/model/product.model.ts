@@ -5,7 +5,7 @@ export interface IProduct {
   id?: number;
   productTypeId?: number;
   providerId?: number;
-  photoId?: number;
+  photo?: string;
   name?: string;
   code?: string;
   sellPrice?: number;
@@ -30,7 +30,7 @@ export class Product implements IProduct {
     public importPrice?: number,
     public quantity?: number,
     public productLine?: string,
-    public image?: string,
+    public photo?: string,
     public point?: number,
     public createdAt?: Moment,
     public updatedAt?: Moment

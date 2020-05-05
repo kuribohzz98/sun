@@ -150,7 +150,7 @@ public class PaymentService {
         return paymentRepository.findAllByUserId(userId).map(paymentMapper::toDto);
     }
 
-    public Integer updateStatusByTransactionId(PaymentStatus status, byte[] qrcode, String transactionId) {
-        return paymentRepository.updateStatusAndQrcodeByTransactionId(status, qrcode, transactionId);
+    public Integer updateStatusByTransactionId(PaymentStatus status, String transactionId) {
+        return paymentRepository.updateStatusByTransactionId(status, transactionId);
     }
 }

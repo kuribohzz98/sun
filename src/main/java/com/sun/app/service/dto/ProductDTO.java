@@ -23,7 +23,7 @@ public class ProductDTO implements Serializable {
     @NotNull
     private Integer providerId;
 
-    private Integer photoId;
+    private String photo;
 
     @NotNull
     private String name;
@@ -146,12 +146,12 @@ public class ProductDTO implements Serializable {
         this.productLine = productLine;
     }
 
-    public Integer getPhotoId() {
-        return photoId;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhotoId(Integer photoId) {
-        this.photoId = photoId;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Integer getSalePrice() {
@@ -229,7 +229,7 @@ public class ProductDTO implements Serializable {
             "id=" + getId() +
             ", productTypeId=" + getProductTypeId() +
             ", providerId=" + getProviderId() +
-            ", photoId=" + getPhotoId() +
+            ", photo=" + getPhoto() +
             ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
             ", sellPrice=" + getSellPrice() +
